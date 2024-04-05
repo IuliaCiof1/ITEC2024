@@ -29,8 +29,6 @@ namespace Main.Scripts
 
                 transform.position = new Vector3(smoothedPosition.x, transform.position.y,
                     _middlePointCalculator.GetDistanceBetweenPlayers() * playersDistanceRation + _zOffset);
-
-                Debug.Log("Position is " + desiredPosition);
             }
         }
     }

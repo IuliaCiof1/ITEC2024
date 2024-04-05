@@ -15,11 +15,7 @@ namespace Main.Scripts
         // Update is called once per frame
         void FixedUpdate()
         {
-            // Calculate the middle point between object1 and object2
             Vector3 middlePoint = (player1.position + player2.position) / 2f;
-
-            // Output the middle point position
-            // Debug.Log("Middle point: " + middlePoint);
             transform.position = middlePoint;
         }
 

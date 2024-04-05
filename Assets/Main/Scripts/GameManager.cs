@@ -6,6 +6,7 @@ namespace Main.Scripts
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
+        [SerializeField] private GameObject startMenu;
         // Start is called before the first frame update
 
         public enum GameState
@@ -37,6 +38,7 @@ namespace Main.Scripts
         void Start()
         {
             _currentGameState = GameState.StartMenu;
+            startMenu.SetActive(true);
         }
 
         // Update is called once per frame
@@ -45,12 +47,7 @@ namespace Main.Scripts
             switch (_currentGameState)
             {
                 case GameState.StartMenu:
-                    Time.timeScale = 0f;
-                    if (Input.GetKeyDown(KeyCode.Space))
-                    {
-                        ChangeState(GameState.PlayStarted);
-                    }
-
+                    // Time.timeScale = 0f;
                     break;
                 case GameState.PlayStarted:
                     if (Input.GetKeyDown(KeyCode.Space))
@@ -94,6 +91,17 @@ namespace Main.Scripts
         public GameState GetCurrentGameState()
         {
             return _currentGameState;
+        }
+
+        public void StartButtonPressed()
+        {
+            startMenu.SetActive(false);
+            ChangeState(GameState.PlayStarted);
+        }
+
+        public void QuitGame()
+        {
+            Application.Quit();
         }
     }
 }
