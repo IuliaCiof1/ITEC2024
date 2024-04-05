@@ -8,6 +8,7 @@ namespace Main.Scripts
         [SerializeField] private GameObject target;
         private const float SmoothSpeed = 0.125f;
         private readonly float _zOffset = 5f;
+        private float playersDistanceRation = 0.5f;
         private MiddlePointCalculator _middlePointCalculator;
 
         private void Start()
@@ -22,15 +23,12 @@ namespace Main.Scripts
         {
             if (target != null)
             {
-                // Calculate the desired position for the camera
                 Vector3 desiredPosition = target.transform.position;
 
-                // Smoothly interpolate between the current position and the desired position
                 Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, SmoothSpeed);
 
-                // Update the camera's position
-                transform.position = new Vector3(desiredPosition.x, transform.position.y,
-                    _middlePointCalculator.GetDistanceBetweenPlayers() * 0.5f + _zOffset);
+                transform.position = new Vector3(smoothedPosition.x, transform.position.y,
+                    _middlePointCalculator.GetDistanceBetweenPlayers() * playersDistanceRation + _zOffset);
 
                 Debug.Log("Position is " + desiredPosition);
             }
