@@ -45,20 +45,28 @@ namespace Main.Scripts
             switch (_currentGameState)
             {
                 case GameState.StartMenu:
+                    Time.timeScale = 0f;
                     break;
                 case GameState.PlayStarted:
+                    Time.timeScale = 1f;
                     break;
                 case GameState.Player1Pending:
+                    Time.timeScale = 0f;
                     break;
                 case GameState.Player1ExecutingAction:
+                    Time.timeScale = 1f;
                     break;
                 case GameState.Player2Pending:
+                    Time.timeScale = 0f;
                     break;
                 case GameState.Player2ExecutingAction:
+                    Time.timeScale = 1f;
                     break;
                 case GameState.RoundEnded:
+                    Time.timeScale = 0f;
                     break;
                 case GameState.GameFinished:
+                    Time.timeScale = 0f;
                     break;
             }
         }
@@ -66,6 +74,11 @@ namespace Main.Scripts
         public void ChangeState(GameState newState)
         {
             _currentGameState = newState;
+        }
+
+        public GameState GetCurrentGameState()
+        {
+            return _currentGameState;
         }
     }
 }
