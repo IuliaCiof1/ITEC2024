@@ -46,8 +46,18 @@ namespace Main.Scripts
             {
                 case GameState.StartMenu:
                     Time.timeScale = 0f;
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        ChangeState(GameState.PlayStarted);
+                    }
+
                     break;
                 case GameState.PlayStarted:
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        ChangeState(GameState.Player1Pending);
+                    }
+
                     Time.timeScale = 1f;
                     break;
                 case GameState.Player1Pending:
@@ -55,12 +65,14 @@ namespace Main.Scripts
                     break;
                 case GameState.Player1ExecutingAction:
                     Time.timeScale = 1f;
+                    ChangeState(GameState.Player2Pending);
                     break;
                 case GameState.Player2Pending:
                     Time.timeScale = 0f;
                     break;
                 case GameState.Player2ExecutingAction:
                     Time.timeScale = 1f;
+                    ChangeState(GameState.Player1Pending);
                     break;
                 case GameState.RoundEnded:
                     Time.timeScale = 0f;
@@ -73,6 +85,9 @@ namespace Main.Scripts
 
         public void ChangeState(GameState newState)
         {
+            string currentGameStateString = Enum.GetName(typeof(GameState), _currentGameState);
+            string newStateString = Enum.GetName(typeof(GameState), newState);
+            Debug.Log("State changed: " + currentGameStateString + " -> " + newStateString);
             _currentGameState = newState;
         }
 
