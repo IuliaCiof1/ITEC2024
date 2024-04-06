@@ -26,7 +26,7 @@ namespace Main.Scripts
         private GameState _currentGameState;
         private bool _player1StartedPerformingAction = false;
         private bool _player2StartedPerformingAction = false;
-        private const float TimeToPerformAction = 1f;
+        private const float TimeToPerformAction = 1.5f;
 
         private void Awake()
         {
@@ -62,10 +62,10 @@ namespace Main.Scripts
                         ChangeState(GameState.Player1Pending);
                     }
 
-                    Time.timeScale = 1f;
+                    // Time.timeScale = 1f;
                     break;
                 case GameState.Player1Pending:
-                    Time.timeScale = 0f;
+                    // Time.timeScale = 0f;
                     if (!player1Canvas.activeSelf)
                     {
                         player1Canvas.SetActive(true);
@@ -75,7 +75,7 @@ namespace Main.Scripts
                 case GameState.Player1ExecutingAction:
                     if (!_player1StartedPerformingAction)
                     {
-                        Time.timeScale = 1f;
+                        // Time.timeScale = 1f;
                         _player1StartedPerformingAction = true;
                         StartCoroutine(ChangeToPendingPlayerState());
 
@@ -87,7 +87,7 @@ namespace Main.Scripts
 
                     break;
                 case GameState.Player2Pending:
-                    Time.timeScale = 0f;
+                    // Time.timeScale = 0f;
                     if (!player2Canvas.activeSelf)
                     {
                         player2Canvas.SetActive(true);
@@ -97,7 +97,7 @@ namespace Main.Scripts
                 case GameState.Player2ExecutingAction:
                     if (!_player2StartedPerformingAction)
                     {
-                        Time.timeScale = 1f;
+                        // Time.timeScale = 1f;
                         _player2StartedPerformingAction = true;
                         StartCoroutine(ChangeToPendingPlayerState());
                         if (player2Canvas.activeSelf)
@@ -108,10 +108,10 @@ namespace Main.Scripts
 
                     break;
                 case GameState.RoundEnded:
-                    Time.timeScale = 0f;
+                    // Time.timeScale = 0f;
                     break;
                 case GameState.GameFinished:
-                    Time.timeScale = 0f;
+                    // Time.timeScale = 0f;
                     break;
             }
         }

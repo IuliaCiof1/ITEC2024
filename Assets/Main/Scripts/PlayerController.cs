@@ -12,7 +12,8 @@ namespace Main.Scripts
 
         [SerializeField] private PlayerNr playerNr;
         private Rigidbody _rigidbody;
-        private const float MoveMultiplier = 8f;
+        private const float MoveMultiplier = 9f;
+
         void Start()
         {
             _rigidbody = GetComponent<Rigidbody>();
@@ -87,6 +88,11 @@ namespace Main.Scripts
             {
                 GameManager.Instance.ChangeState(GameManager.GameState.Player2ExecutingAction);
             }
+        }
+
+        public PlayerNr GetPlayerNr()
+        {
+            return playerNr;
         }
     }
 }
