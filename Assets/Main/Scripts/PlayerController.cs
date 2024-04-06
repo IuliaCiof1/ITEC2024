@@ -57,7 +57,6 @@ namespace Main.Scripts
             {
                 keyWasPressed = true;
                 _playerStats.RegenStamina();
-                _playerStats.RegenHealth();
                 _rigidbody.AddForce(-transform.forward * MoveMultiplier, ForceMode.Impulse);
             }
             else if (Input.GetKeyDown(KeyCode.S))
@@ -96,7 +95,6 @@ namespace Main.Scripts
             {
                 keyWasPressed = true;
                 _playerStats.RegenStamina();
-                _playerStats.RegenHealth();
                 _rigidbody.AddForce(-transform.forward * MoveMultiplier, ForceMode.Impulse);
             }
             else if (Input.GetKeyDown(KeyCode.I)) // Weak attack

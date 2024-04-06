@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 namespace Main.Scripts
 {
-    
     public class PlayerStats : MonoBehaviour
     {
         public int maxHealth = 100;
@@ -67,7 +66,6 @@ namespace Main.Scripts
             {
                 TakeDamage(30);
                 camFollow.ShakeCamera(4f);
-
             }
 
             Debug.Log("CurrentStamina = " + CurrentStamina + " CurrentHealth = " + CurrentHealth);
@@ -121,15 +119,10 @@ namespace Main.Scripts
         //     _lostStamina += _lostStamina + lostStaminaModif;
         // }
         //
-        public void RegenHealth()
-        {
-            CurrentHealth = Mathf.Clamp(CurrentHealth + maxHealth % 20, 0f, maxHealth);
-            UpdateStaminaHealthCanvas();
-        }
 
         public void RegenStamina()
         {
-            CurrentStamina = Mathf.Clamp(CurrentStamina + maxStamina % 30, 0f, maxStamina);
+            CurrentStamina = Mathf.Clamp(CurrentStamina + maxStamina * 0.3f, 0f, maxStamina);
             UpdateStaminaHealthCanvas();
         }
 
@@ -294,48 +287,48 @@ namespace Main.Scripts
                 switch (_playerController.GetPlayerNr())
                 {
                     case PlayerController.PlayerNr.Player1:
-                        foreach (Transform child in player1StatsCanvas.transform)
+                    {
+                        TextMeshProUGUI[] textMeshPros1 = player1StatsCanvas.GetComponentsInChildren<TextMeshProUGUI>();
+                        foreach (TextMeshProUGUI textMeshPro in textMeshPros1)
                         {
-                            TMP_Text healthTxt = child.GetComponent<TMP_Text>();
-                            if (healthTxt != null && child.gameObject.name == textHealthStr)
+                            if (textMeshPro.gameObject.name == textHealthStr)
                             {
-                                healthTxt.text = string.Format("{0}/{1}", CurrentHealth, maxHealth);
+                                textMeshPro.text = string.Format("{0:0}/{1:0}", CurrentHealth, maxHealth);
                                 break;
                             }
                         }
 
-                        foreach (Transform child in player1StatsCanvas.transform)
+                        foreach (TextMeshProUGUI textMeshPro in textMeshPros1)
                         {
-                            TMP_Text staminaTxt = child.GetComponent<TMP_Text>();
-                            if (staminaTxt != null && child.gameObject.name == textStaminaStr)
+                            if (textMeshPro.gameObject.name == textStaminaStr)
                             {
-                                staminaTxt.text = string.Format("{0}/{1}", CurrentStamina, maxStamina);
+                                textMeshPro.text = string.Format("{0:0}/{1:0}", CurrentStamina, maxStamina);
                                 break;
                             }
                         }
-
+                    }
                         break;
                     case PlayerController.PlayerNr.Player2:
-
-                        foreach (Transform child in player2StatsCanvas.transform)
+                    {
+                        TextMeshProUGUI[] textMeshPros2 = player2StatsCanvas.GetComponentsInChildren<TextMeshProUGUI>();
+                        foreach (TextMeshProUGUI textMeshPro in textMeshPros2)
                         {
-                            TMP_Text healthTxt = child.GetComponent<TMP_Text>();
-                            if (healthTxt != null && child.gameObject.name == textHealthStr)
+                            if (textMeshPro.gameObject.name == textHealthStr)
                             {
-                                healthTxt.text = string.Format("{0}/{1}", CurrentHealth, maxHealth);
+                                textMeshPro.text = string.Format("{0:0}/{1:0}", CurrentHealth, maxHealth);
                                 break;
                             }
                         }
 
-                        foreach (Transform child in player2StatsCanvas.transform)
+                        foreach (TextMeshProUGUI textMeshPro in textMeshPros2)
                         {
-                            TMP_Text staminaTxt = child.GetComponent<TMP_Text>();
-                            if (staminaTxt != null && child.gameObject.name == textStaminaStr)
+                            if (textMeshPro.gameObject.name == textStaminaStr)
                             {
-                                staminaTxt.text = string.Format("{0}/{1}", CurrentStamina, maxStamina);
+                                textMeshPro.text = string.Format("{0:0}/{1:0}", CurrentStamina, maxStamina);
                                 break;
                             }
                         }
+                    }
 
                         break;
                 }
