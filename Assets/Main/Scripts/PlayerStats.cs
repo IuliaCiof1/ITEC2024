@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -20,6 +21,7 @@ namespace Main.Scripts
         private int _lostStamina = 30;
         private int lostStaminaModif = 0;
         private PlayerController _playerController;
+        private float timeToWaitForDeathAnimation = 3.5f;
         [SerializeField] private GameObject player1StatsCanvas;
         [SerializeField] private GameObject player2StatsCanvas;
         public CameraFollow camFollow;
@@ -74,7 +76,7 @@ namespace Main.Scripts
         public void InitializePlayerStats()
         {
             CurrentStamina = maxStamina;
-            CurrentHealth = maxHealth;
+            CurrentHealth = maxHealth + healthModif;
             Debug.Log("CurrentStamina = " + CurrentStamina + " CurrentHealth = " + CurrentHealth);
             UpdateStaminaHealthCanvas();
         }
@@ -99,7 +101,10 @@ namespace Main.Scripts
 
         public void Die()
         {
+            GameManager.Instance.PlayerDied();
+            GetComponent<AnimationManager>().StartDeathAnimation();
             deathSource.PlayOneShot(clip);
+            StartCoroutine(IncrementWinnerCounter());
             Debug.Log(transform.name + "died.");
         }
 
@@ -119,13 +124,27 @@ namespace Main.Scripts
         //     _lostStamina += _lostStamina + lostStaminaModif;
         // }
         //
+        IEnumerator IncrementWinnerCounter()
+        {
+            yield return new WaitForSeconds(timeToWaitForDeathAnimation);
+            switch (_playerController.GetPlayerNr())
+            {
+                case PlayerController.PlayerNr.Player1:
+                    GameManager.Instance.setPlayer2WinCounter();
+                    break;
+                case PlayerController.PlayerNr.Player2:
+                    GameManager.Instance.setPlayer1WinCounter();
+                    break;
+            }
+
+            GameManager.Instance.ChangeState(GameManager.GameState.RoundEnded);
+        }
 
         public void RegenStamina()
         {
             CurrentStamina = Mathf.Clamp(CurrentStamina + maxStamina * 0.3f, 0f, maxStamina);
             UpdateStaminaHealthCanvas();
         }
-
 
         public float GetWeakAttackCost()
         {
@@ -166,37 +185,31 @@ namespace Main.Scripts
         public void TakeDamageWeak()
         {
             float dealtDamage = (baseDamage + damageModif) * SkillDamageModifier.Weak;
-            CurrentHealth -= dealtDamage;
+            CurrentHealth = Mathf.Clamp(CurrentHealth - dealtDamage, 0f, maxHealth + healthModif);
             Debug.Log(transform.name + " takes " + dealtDamage + " damage. ");
             deathSource.PlayOneShot(lightHitClip);
 
+            UpdateStaminaHealthCanvas();
             if (CurrentHealth <= 0)
             {
                 //sound
                 Die();
-            }
-            else
-            {
-                UpdateStaminaHealthCanvas();
             }
         }
 
         public void TakeDamageMedium()
         {
             float dealtDamage = (baseDamage + damageModif) * SkillDamageModifier.Medium;
-            CurrentHealth -= dealtDamage;
+            CurrentHealth = Mathf.Clamp(CurrentHealth - dealtDamage, 0f, maxHealth + healthModif);
             Debug.Log(transform.name + " takes " + dealtDamage + " damage. ");
             camFollow.ShakeCamera(2f);
             deathSource.PlayOneShot(lightHitClip);
+            UpdateStaminaHealthCanvas();
 
             if (CurrentHealth <= 0)
             {
                 //sound
                 Die();
-            }
-            else
-            {
-                UpdateStaminaHealthCanvas();
             }
         }
 
@@ -204,19 +217,16 @@ namespace Main.Scripts
         public void TakeDamageStrong()
         {
             float dealtDamage = (baseDamage + damageModif) * SkillDamageModifier.Strong;
-            CurrentHealth -= dealtDamage;
+            CurrentHealth = Mathf.Clamp(CurrentHealth - dealtDamage, 0f, maxHealth + healthModif);
             Debug.Log(transform.name + " takes " + dealtDamage + " damage. ");
             camFollow.ShakeCamera(4f);
             deathSource.PlayOneShot(highHitClip);
 
+            UpdateStaminaHealthCanvas();
             if (CurrentHealth <= 0)
             {
                 //sound
                 Die();
-            }
-            else
-            {
-                UpdateStaminaHealthCanvas();
             }
         }
 
@@ -242,7 +252,7 @@ namespace Main.Scripts
                             Slider slider = child.GetComponent<Slider>();
                             if (slider != null && child.gameObject.name == player1HealthStr)
                             {
-                                slider.value = CurrentHealth / maxHealth;
+                                slider.value = CurrentHealth / (maxHealth + healthModif);
                                 break;
                             }
                         }
@@ -265,7 +275,7 @@ namespace Main.Scripts
                             Slider slider = child.GetComponent<Slider>();
                             if (slider != null && child.gameObject.name == player2HealthStr)
                             {
-                                slider.value = CurrentHealth / maxHealth;
+                                slider.value = CurrentHealth / (maxHealth + healthModif);
                                 break;
                             }
                         }
@@ -293,7 +303,8 @@ namespace Main.Scripts
                         {
                             if (textMeshPro.gameObject.name == textHealthStr)
                             {
-                                textMeshPro.text = string.Format("{0:0}/{1:0}", CurrentHealth, maxHealth);
+                                textMeshPro.text = string.Format("{0:0}/{1:0}", CurrentHealth,
+                                    (maxHealth + healthModif));
                                 break;
                             }
                         }
@@ -315,7 +326,8 @@ namespace Main.Scripts
                         {
                             if (textMeshPro.gameObject.name == textHealthStr)
                             {
-                                textMeshPro.text = string.Format("{0:0}/{1:0}", CurrentHealth, maxHealth);
+                                textMeshPro.text = string.Format("{0:0}/{1:0}", CurrentHealth,
+                                    (maxHealth + healthModif));
                                 break;
                             }
                         }

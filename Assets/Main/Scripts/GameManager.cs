@@ -18,6 +18,10 @@ namespace Main.Scripts
         private PlayerStats _player2Stats;
         private int player1WinCounter = 0;
         private int player2WinCounter = 0;
+        private int maxNumberOfRounds = 5;
+        private Vector3 _player1InitialPosition;
+        private Vector3 _player2InitialPosition;
+        private bool _onePlayerDied;
 
         public enum GameState
         {
@@ -57,6 +61,9 @@ namespace Main.Scripts
             _player1Stats = player1.GetComponent<PlayerStats>();
             _player2Stats = player2.GetComponent<PlayerStats>();
             playerStatsCanvas.SetActive(false);
+            _player1InitialPosition = _player1Stats.transform.position;
+            _player2InitialPosition = _player2Stats.transform.position;
+            _onePlayerDied = false;
         }
 
         // Update is called once per frame
@@ -72,10 +79,16 @@ namespace Main.Scripts
                     {
                         playerStatsCanvas.SetActive(true);
                     }
+
                     _player1Stats.InitializePlayerStats();
                     _player2Stats.InitializePlayerStats();
+                    _player1Stats.transform.position = _player1InitialPosition;
+                    _player2Stats.transform.position = _player2InitialPosition;
+                    _player1Stats.GetComponent<Animator>().Play("PlayerIdle");
+                    _player2Stats.GetComponent<Animator>().Play("PlayerIdle");
                     backgroundMusic.SetActive(true);
                     ChangeState(GameState.Player1Pending);
+                    _onePlayerDied = false;
 
                     // Time.timeScale = 1f;
                     break;
@@ -123,11 +136,29 @@ namespace Main.Scripts
 
                     break;
                 case GameState.RoundEnded:
-                    // Time.timeScale = 0f;
                     if (playerStatsCanvas.activeSelf)
                     {
                         playerStatsCanvas.SetActive(false);
                     }
+
+                    if (player1Canvas.activeSelf)
+                    {
+                        player1Canvas.SetActive(false);
+                    }
+                    if (player2Canvas.activeSelf)
+                    {
+                        player2Canvas.SetActive(false);
+                    }
+
+                    if (maxNumberOfRounds <= player1WinCounter + player2WinCounter)
+                    {
+                        ChangeState(GameState.GameFinished);
+                    }
+                    else
+                    {
+                        ChangeState(GameState.RoundStart);
+                    }
+
                     break;
                 case GameState.GameFinished:
                     // Time.timeScale = 0f;
@@ -137,6 +168,7 @@ namespace Main.Scripts
 
         public void ChangeState(GameState newState)
         {
+            if (_onePlayerDied && (newState != GameState.RoundEnded) && (newState != GameState.GameFinished) && (newState != GameState.RoundStart)) return;
             string currentGameStateString = Enum.GetName(typeof(GameState), _currentGameState);
             string newStateString = Enum.GetName(typeof(GameState), newState);
             Debug.Log("State changed: " + currentGameStateString + " -> " + newStateString);
@@ -182,13 +214,19 @@ namespace Main.Scripts
             Application.Quit();
         }
 
-        public void setPlayer1WinCounter() {
+        public void setPlayer1WinCounter()
+        {
             player1WinCounter++;
         }
 
         public void setPlayer2WinCounter()
         {
             player2WinCounter++;
+        }
+
+        public void PlayerDied()
+        {
+            _onePlayerDied = true;
         }
     }
 }

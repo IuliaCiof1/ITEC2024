@@ -16,6 +16,7 @@ namespace Main.Scripts
         private static readonly int MidAttack = Animator.StringToHash("MidAttack");
         private static readonly int StrongAttack = Animator.StringToHash("StrongAttack");
         private static readonly int Attacking = Animator.StringToHash("Attacking");
+        private static readonly int PlayDeath = Animator.StringToHash("PlayDeath");
 
         void Start()
         {
@@ -85,6 +86,11 @@ namespace Main.Scripts
         {
             animator.SetBool(Attacking, true);
             StartCoroutine(ResetValuesAfterDelay());
+        }
+
+        public void StartDeathAnimation()
+        {
+            animator.SetTrigger(PlayDeath);
         }
     }
 }
