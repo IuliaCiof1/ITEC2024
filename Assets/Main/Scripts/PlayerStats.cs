@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     public int maxHealth = 100;
-    public int currentHealth { get; private set; }
+    public float CurrentHealth { get; private set; }
     private int healthModif = 0;
 
     private int baseDamage = 20;
@@ -13,18 +13,34 @@ public class PlayerStats : MonoBehaviour
     public int damage = 0;
 
     public int maxStamina = 100;
-    public int currentStamina { get; private set; }
-    private int lostStamina = 30;
+    public float CurrentStamina { get; private set; }
+    private int _lostStamina = 30;
     private int lostStaminaModif = 0;
+
+    public void InitializePlayerStats()
+    {
+        CurrentStamina = maxStamina;
+        CurrentHealth = maxHealth;
+    }
+
+    private struct SkillCostModifier
+    {
+        public const float Weak = 0.7f;
+        public const float Medium = 1f;
+        public const float Strong = 1.3f;
+    }
 
     public AudioSource deathSource;
     public AudioClip clip;
+
+    // public List<Weapon> Weapons = new List<Weapon>();
 
     private void Start()
     {
         setCurrentHealth();
         setDamage();
     }
+
     private void Awake()
     {
         setCurrentHealth();
@@ -40,23 +56,22 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage) 
+    public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        CurrentHealth -= damage;
         Debug.Log(transform.name + " takes " + damage + " damage. ");
 
-        if (currentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
             //sound
             Die();
-
         }
     }
 
     public void decreaseStamina()
     {
-        currentStamina -= lostStamina;
-        Debug.Log(transform.name + " Current stamina " + currentStamina);
+        CurrentStamina -= _lostStamina;
+        Debug.Log(transform.name + " Current stamina " + CurrentStamina);
     }
 
     public void Die()
@@ -67,7 +82,7 @@ public class PlayerStats : MonoBehaviour
 
     public void setCurrentHealth()
     {
-        currentHealth = maxHealth + healthModif;
+        CurrentHealth = maxHealth + healthModif;
     }
 
     public void setDamage()
@@ -77,17 +92,56 @@ public class PlayerStats : MonoBehaviour
 
     public void setLostStamina()
     {
-        lostStamina += lostStamina + lostStaminaModif;
+        _lostStamina += _lostStamina + lostStaminaModif;
     }
 
-    public void regenHealth() {
-
-        currentHealth += maxHealth % 10;
+    public void regenHealth()
+    {
+        CurrentHealth = Mathf.Clamp(CurrentHealth + maxHealth % 10, 0f, maxHealth);
     }
 
     public void regenStamina()
     {
+        CurrentStamina = Mathf.Clamp(CurrentStamina + maxStamina % 30, 0f, maxStamina);
+    }
 
-        currentStamina += maxStamina % 30;
+
+    public float GetWeakAttackCost()
+    {
+        return _lostStamina * SkillCostModifier.Weak + lostStaminaModif;
+    }
+
+
+    public float GetMidAttackCost()
+    {
+        return _lostStamina * SkillCostModifier.Medium + lostStaminaModif;
+    }
+
+
+    public float GetStrongAttackCost()
+    {
+        return _lostStamina * SkillCostModifier.Strong + lostStaminaModif;
+    }
+
+    public void DecreaseStaminaWeakSkill()
+    {
+        CurrentStamina -= _lostStamina * SkillCostModifier.Strong + lostStaminaModif;
+    }
+
+    public void TakeDamageWeak()
+    {
+        CurrentHealth -= damage;
+        Debug.Log(transform.name + " takes " + damage + " damage. ");
+
+        if (CurrentHealth <= 0)
+        {
+            //sound
+            Die();
+        }
+    }
+
+    public void InitializeStats()
+    {
+        
     }
 }

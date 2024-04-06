@@ -10,11 +10,13 @@ namespace Main.Scripts
         [SerializeField] private GameObject startMenu;
         [SerializeField] private GameObject player1Canvas;
         [SerializeField] private GameObject player2Canvas;
+        [SerializeField] private PlayerStats player1Stats;
+        [SerializeField] private PlayerStats player2Stats;
 
         public enum GameState
         {
             StartMenu,
-            PlayStarted,
+            RoundStart,
             Player1Pending,
             Player1ExecutingAction,
             Player2Pending,
@@ -56,11 +58,10 @@ namespace Main.Scripts
                 case GameState.StartMenu:
                     // Time.timeScale = 0f;
                     break;
-                case GameState.PlayStarted:
-                    if (Input.GetKeyDown(KeyCode.Space))
-                    {
-                        ChangeState(GameState.Player1Pending);
-                    }
+                case GameState.RoundStart:
+                    player1Stats.InitializePlayerStats();
+                    player2Stats.InitializePlayerStats();
+                    ChangeState(GameState.Player1Pending);
 
                     // Time.timeScale = 1f;
                     break;
@@ -155,7 +156,7 @@ namespace Main.Scripts
         public void StartButtonPressed()
         {
             startMenu.SetActive(false);
-            ChangeState(GameState.PlayStarted);
+            ChangeState(GameState.RoundStart);
         }
 
         public void QuitGame()

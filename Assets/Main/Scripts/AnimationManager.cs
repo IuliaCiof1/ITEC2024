@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Main.Scripts
@@ -10,6 +11,8 @@ namespace Main.Scripts
         private static readonly int MovingForward = Animator.StringToHash("MovingForward");
         private static readonly int MovingBackward = Animator.StringToHash("MovingBackward");
         private PlayerController _playerController;
+        private static readonly int WeakAttack = Animator.StringToHash("WeakAttack");
+        private float _timeToWaitBeforeResettingAttackBools = 0.8f;
 
         void Start()
         {
@@ -23,7 +26,13 @@ namespace Main.Scripts
             CheckMovementDirection();
         }
 
-        void CheckMovementDirection()
+        IEnumerator ResetValuesAfterDelay()
+        {
+            yield return new WaitForSeconds(_timeToWaitBeforeResettingAttackBools);
+            animator.SetBool(WeakAttack, false);
+        }
+
+        private void CheckMovementDirection()
         {
             if (_rigidbody != null)
             {
@@ -45,6 +54,7 @@ namespace Main.Scripts
                             animator.SetBool(MovingForward, false);
                             animator.SetBool(MovingBackward, false);
                         }
+
                         break;
                     case PlayerController.PlayerNr.Player2:
                         if (_rigidbody.velocity.x > 0.2f)
@@ -62,9 +72,16 @@ namespace Main.Scripts
                             animator.SetBool(MovingForward, false);
                             animator.SetBool(MovingBackward, false);
                         }
+
                         break;
                 }
             }
+        }
+
+        public void StartWeakAttack()
+        {
+            animator.SetBool(WeakAttack, true);
+            StartCoroutine(ResetValuesAfterDelay());
         }
     }
 }

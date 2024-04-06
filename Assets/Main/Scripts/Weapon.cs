@@ -4,30 +4,23 @@ namespace Main.Scripts
 {
     public class Weapon : MonoBehaviour
     {
+        public float LostStaminaModifier;
+        public float DamageModifier;
+        public float HealthModifier;
 
-        public virtual void Attack()
-        {
-            Debug.Log("Weapon attack");
-        }
-
-        protected GameObject WeaponOwner;
-        protected float Damage;
-        protected float DamageModifier;
-        protected float CritChance;
-        protected float CritDamageMultiplier;
-
-        void Start()
+        public Weapon()
         {
         }
-
-        // Update is called once per frame
-        void Update()
+        public Weapon(float lostStaminaModifier, float damageModifier, float healthModifier)
         {
+            LostStaminaModifier = lostStaminaModifier;
+            DamageModifier = damageModifier;
+            HealthModifier = healthModifier;
         }
+    }
 
-        public void SetOwner(GameObject owner)
-        {
-            WeaponOwner = owner;
-        }
+    struct Weapons
+    {
+        static Weapon Sword = new Weapon(10f, 15f, -20f);
     }
 }
