@@ -82,12 +82,12 @@ public class PlayerStats : MonoBehaviour
 
     public void regenHealth() {
 
-        currentHealth += currentHealth % 10;
+        currentHealth += maxHealth % 10;
     }
 
     public void regenStamina()
     {
 
-        currentStamina += currentStamina % 30;
+        currentStamina += maxStamina % 30;
     }
 }
