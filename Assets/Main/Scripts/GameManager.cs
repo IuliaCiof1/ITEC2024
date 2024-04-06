@@ -16,6 +16,8 @@ namespace Main.Scripts
         [SerializeField] private GameObject backgroundMusic;
         private PlayerStats _player1Stats;
         private PlayerStats _player2Stats;
+        private int player1WinCounter = 0;
+        private int player2WinCounter = 0;
 
         public enum GameState
         {
@@ -178,6 +180,15 @@ namespace Main.Scripts
         public void QuitGame()
         {
             Application.Quit();
+        }
+
+        public void setPlayer1WinCounter() {
+            player1WinCounter++;
+        }
+
+        public void setPlayer2WinCounter()
+        {
+            player2WinCounter++;
         }
     }
 }

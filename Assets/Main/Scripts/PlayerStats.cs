@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -40,6 +41,8 @@ namespace Main.Scripts
 
         public AudioSource deathSource;
         public AudioClip clip;
+        public AudioClip lightHitClip;
+        public AudioClip highHitClip;
 
         // public List<Weapon> Weapons = new List<Weapon>();
 
@@ -172,6 +175,7 @@ namespace Main.Scripts
             float dealtDamage = (baseDamage + damageModif) * SkillDamageModifier.Weak;
             CurrentHealth -= dealtDamage;
             Debug.Log(transform.name + " takes " + dealtDamage + " damage. ");
+            deathSource.PlayOneShot(lightHitClip);
 
             if (CurrentHealth <= 0)
             {
@@ -190,6 +194,7 @@ namespace Main.Scripts
             CurrentHealth -= dealtDamage;
             Debug.Log(transform.name + " takes " + dealtDamage + " damage. ");
             camFollow.ShakeCamera(2f);
+            deathSource.PlayOneShot(lightHitClip);
 
             if (CurrentHealth <= 0)
             {
@@ -209,6 +214,7 @@ namespace Main.Scripts
             CurrentHealth -= dealtDamage;
             Debug.Log(transform.name + " takes " + dealtDamage + " damage. ");
             camFollow.ShakeCamera(4f);
+            deathSource.PlayOneShot(highHitClip);
 
             if (CurrentHealth <= 0)
             {
