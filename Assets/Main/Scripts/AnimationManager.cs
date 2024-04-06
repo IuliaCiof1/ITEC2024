@@ -13,6 +13,9 @@ namespace Main.Scripts
         private PlayerController _playerController;
         private static readonly int WeakAttack = Animator.StringToHash("WeakAttack");
         private float _timeToWaitBeforeResettingAttackBools = 0.8f;
+        private static readonly int MidAttack = Animator.StringToHash("MidAttack");
+        private static readonly int StrongAttack = Animator.StringToHash("StrongAttack");
+        private static readonly int Attacking = Animator.StringToHash("Attacking");
 
         void Start()
         {
@@ -29,7 +32,7 @@ namespace Main.Scripts
         IEnumerator ResetValuesAfterDelay()
         {
             yield return new WaitForSeconds(_timeToWaitBeforeResettingAttackBools);
-            animator.SetBool(WeakAttack, false);
+            animator.SetBool(Attacking, false);
         }
 
         private void CheckMovementDirection()
@@ -78,9 +81,9 @@ namespace Main.Scripts
             }
         }
 
-        public void StartWeakAttack()
+        public void StartAttack()
         {
-            animator.SetBool(WeakAttack, true);
+            animator.SetBool(Attacking, true);
             StartCoroutine(ResetValuesAfterDelay());
         }
     }

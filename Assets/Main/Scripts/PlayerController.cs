@@ -14,11 +14,13 @@ namespace Main.Scripts
         private Rigidbody _rigidbody;
         private const float MoveMultiplier = 15f;
         private CombatManager _combatManager;
+        private PlayerStats _playerStats;
 
         void Start()
         {
             _rigidbody = GetComponent<Rigidbody>();
             _combatManager = GetComponent<CombatManager>();
+            _playerStats = GetComponent<PlayerStats>();
         }
 
         void Update()
@@ -51,9 +53,11 @@ namespace Main.Scripts
         private void Player1InputHandler()
         {
             bool keyWasPressed = false;
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.A)) // move back + regen
             {
                 keyWasPressed = true;
+                _playerStats.RegenStamina();
+                _playerStats.RegenHealth();
                 _rigidbody.AddForce(-transform.forward * MoveMultiplier, ForceMode.Impulse);
             }
             else if (Input.GetKeyDown(KeyCode.S))
@@ -88,9 +92,11 @@ namespace Main.Scripts
                 keyWasPressed = true;
                 _rigidbody.AddForce(transform.forward * MoveMultiplier, ForceMode.Impulse);
             }
-            else if (Input.GetKeyDown(KeyCode.L))
+            else if (Input.GetKeyDown(KeyCode.L)) // move back + regen
             {
                 keyWasPressed = true;
+                _playerStats.RegenStamina();
+                _playerStats.RegenHealth();
                 _rigidbody.AddForce(-transform.forward * MoveMultiplier, ForceMode.Impulse);
             }
             else if (Input.GetKeyDown(KeyCode.I)) // Weak attack

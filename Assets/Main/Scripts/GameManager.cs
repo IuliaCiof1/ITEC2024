@@ -10,8 +10,10 @@ namespace Main.Scripts
         [SerializeField] private GameObject startMenu;
         [SerializeField] private GameObject player1Canvas;
         [SerializeField] private GameObject player2Canvas;
-        [SerializeField] private PlayerStats player1Stats;
-        [SerializeField] private PlayerStats player2Stats;
+        [SerializeField] private GameObject player1;
+        [SerializeField] private GameObject player2;
+        private PlayerStats _player1Stats;
+        private PlayerStats _player2Stats;
 
         public enum GameState
         {
@@ -48,6 +50,8 @@ namespace Main.Scripts
             startMenu.SetActive(true);
             player1Canvas.SetActive(false);
             player2Canvas.SetActive(false);
+            _player1Stats = player1.GetComponent<PlayerStats>();
+            _player2Stats = player2.GetComponent<PlayerStats>();
         }
 
         // Update is called once per frame
@@ -59,8 +63,8 @@ namespace Main.Scripts
                     // Time.timeScale = 0f;
                     break;
                 case GameState.RoundStart:
-                    player1Stats.InitializePlayerStats();
-                    player2Stats.InitializePlayerStats();
+                    _player1Stats.InitializePlayerStats();
+                    _player2Stats.InitializePlayerStats();
                     ChangeState(GameState.Player1Pending);
 
                     // Time.timeScale = 1f;

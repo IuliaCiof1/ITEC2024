@@ -62,17 +62,21 @@ public class CombatManager : MonoBehaviour
         if (_playerStats.CurrentStamina > _playerStats.GetWeakAttackCost())
         {
             attackPerformed = true;
-            _animationManager.StartWeakAttack();
+            _animationManager.StartAttack();
             _playerStats.DecreaseStaminaWeakSkill();
             if (_enemyPlayer != null)
             {
                 PlayerStats playerStats = _enemyPlayer.GetComponent<PlayerStats>();
                 playerStats.TakeDamageWeak();
             }
+
+            Debug.Log("CombatMngr: currentStamina = " + _playerStats.CurrentStamina + "Weak attack cost = " +
+                      _playerStats.GetWeakAttackCost());
         }
         else
         {
-            Debug.Log("Not enough stamina: currentStamina =  " + _playerStats.CurrentStamina + "Weak attack cost =" + _playerStats.GetWeakAttackCost());
+            Debug.Log("Not enough stamina: currentStamina = " + _playerStats.CurrentStamina + "Weak attack cost = " +
+                      _playerStats.GetWeakAttackCost());
         }
 
         return attackPerformed;
@@ -80,11 +84,47 @@ public class CombatManager : MonoBehaviour
 
     public bool PerformMediumAttack()
     {
-        return false;
+        bool attackPerformed = false;
+        if (_playerStats.CurrentStamina > _playerStats.GetMidAttackCost())
+        {
+            attackPerformed = true;
+            _animationManager.StartAttack();
+            _playerStats.DecreaseStaminaMediumSkill();
+            if (_enemyPlayer != null)
+            {
+                PlayerStats playerStats = _enemyPlayer.GetComponent<PlayerStats>();
+                playerStats.TakeDamageMedium();
+            }
+        }
+        else
+        {
+            Debug.Log("PerformMediumAttack--- Not enough stamina: currentStamina = " + _playerStats.CurrentStamina +
+                      "Weak attack cost = " + _playerStats.GetWeakAttackCost());
+        }
+
+        return attackPerformed;
     }
 
     public bool PerformStrongAttack()
     {
-        return false;
+        bool attackPerformed = false;
+        if (_playerStats.CurrentStamina > _playerStats.GetStrongAttackCost())
+        {
+            attackPerformed = true;
+            _animationManager.StartAttack();
+            _playerStats.DecreaseStaminaStrongSkill();
+            if (_enemyPlayer != null)
+            {
+                PlayerStats playerStats = _enemyPlayer.GetComponent<PlayerStats>();
+                playerStats.TakeDamageStrong();
+            }
+        }
+        else
+        {
+            Debug.Log("PerformStrongAttack--- Not enough stamina: currentStamina = " + _playerStats.CurrentStamina +
+                      "Weak attack cost = " + _playerStats.GetWeakAttackCost());
+        }
+
+        return attackPerformed;
     }
 }
