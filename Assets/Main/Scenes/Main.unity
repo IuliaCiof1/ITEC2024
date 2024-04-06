@@ -186,6 +186,10 @@ PrefabInstance:
       value: Player1
       objectReference: {fileID: 0}
     - target: {fileID: 7520862453204402956, guid: 3df15f0c0fc2f4a4ca9b66afd589b64b, type: 3}
+      propertyPath: camFollow
+      value: 
+      objectReference: {fileID: 963194230}
+    - target: {fileID: 7520862453204402956, guid: 3df15f0c0fc2f4a4ca9b66afd589b64b, type: 3}
       propertyPath: playerStatsCanvas
       value: 
       objectReference: {fileID: 608275276}
@@ -219,6 +223,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 3061597321767589041, guid: a96f16bf1b537774a89deb98d7e24d06, type: 3}
+      propertyPath: camFollow
+      value: 
+      objectReference: {fileID: 963194230}
     - target: {fileID: 3061597321767589041, guid: a96f16bf1b537774a89deb98d7e24d06, type: 3}
       propertyPath: playerStatsCanvas
       value: 

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace Main.Scripts
 {
+    
     public class PlayerStats : MonoBehaviour
     {
         public int maxHealth = 100;
@@ -20,6 +21,7 @@ namespace Main.Scripts
         private PlayerController _playerController;
         [SerializeField] private GameObject player1StatsCanvas;
         [SerializeField] private GameObject player2StatsCanvas;
+        public CameraFollow camFollow;
 
         private struct SkillCostModifier
         {
@@ -60,6 +62,8 @@ namespace Main.Scripts
             if (Input.GetKeyDown(KeyCode.T))
             {
                 TakeDamage(30);
+                camFollow.ShakeCamera(4f);
+
             }
 
             Debug.Log("CurrentStamina = " + CurrentStamina + " CurrentHealth = " + CurrentHealth);
@@ -181,6 +185,7 @@ namespace Main.Scripts
             float dealtDamage = (baseDamage + damageModif) * SkillDamageModifier.Medium;
             CurrentHealth -= dealtDamage;
             Debug.Log(transform.name + " takes " + dealtDamage + " damage. ");
+            camFollow.ShakeCamera(2f);
 
             if (CurrentHealth <= 0)
             {
@@ -199,6 +204,7 @@ namespace Main.Scripts
             float dealtDamage = (baseDamage + damageModif) * SkillDamageModifier.Strong;
             CurrentHealth -= dealtDamage;
             Debug.Log(transform.name + " takes " + dealtDamage + " damage. ");
+            camFollow.ShakeCamera(4f);
 
             if (CurrentHealth <= 0)
             {
