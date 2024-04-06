@@ -30,7 +30,6 @@ namespace Main.Scripts
                 switch (_playerController.GetPlayerNr())
                 {
                     case PlayerController.PlayerNr.Player1:
-                        Debug.Log("Velocity X = " + _rigidbody.velocity.x);
                         if (_rigidbody.velocity.x < -0.2f)
                         {
                             animator.SetBool(MovingForward, true);
@@ -48,22 +47,18 @@ namespace Main.Scripts
                         }
                         break;
                     case PlayerController.PlayerNr.Player2:
-                        Debug.Log("Velocity = " + _rigidbody.velocity);
                         if (_rigidbody.velocity.x > 0.2f)
                         {
-                            Debug.Log("Player is moving FORWARD.");
                             animator.SetBool(MovingForward, true);
                             animator.SetBool(MovingBackward, false);
                         }
                         else if (_rigidbody.velocity.x < -0.2f)
                         {
-                            Debug.Log("Player is moving BACKWARD.");
                             animator.SetBool(MovingForward, false);
                             animator.SetBool(MovingBackward, true);
                         }
                         else
                         {
-                            Debug.Log("Player is NOT MOVING.");
                             animator.SetBool(MovingForward, false);
                             animator.SetBool(MovingBackward, false);
                         }

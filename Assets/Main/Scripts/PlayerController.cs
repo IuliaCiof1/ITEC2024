@@ -52,13 +52,11 @@ namespace Main.Scripts
             if (Input.GetKeyDown(KeyCode.A))
             {
                 keyWasPressed = true;
-                Debug.Log("Key A was pressed for player 1");
                 _rigidbody.AddForce(-transform.forward * MoveMultiplier, ForceMode.Impulse);
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
                 keyWasPressed = true;
-                Debug.Log("Key S was pressed for player 1");
                 _rigidbody.AddForce(transform.forward * MoveMultiplier, ForceMode.Impulse);
             }
 
@@ -74,13 +72,11 @@ namespace Main.Scripts
             if (Input.GetKeyDown(KeyCode.K))
             {
                 keyWasPressed = true;
-                Debug.Log("Key K was pressed for player 2");
                 _rigidbody.AddForce(transform.forward * MoveMultiplier, ForceMode.Impulse);
             }
             else if (Input.GetKeyDown(KeyCode.L))
             {
                 keyWasPressed = true;
-                Debug.Log("Key L was pressed for player 2");
                 _rigidbody.AddForce(-transform.forward * MoveMultiplier, ForceMode.Impulse);
             }
 
