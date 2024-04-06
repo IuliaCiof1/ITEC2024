@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Main.Scripts
 {
@@ -15,6 +17,9 @@ namespace Main.Scripts
         public float CurrentStamina { get; private set; }
         private int _lostStamina = 30;
         private int lostStaminaModif = 0;
+        private PlayerController _playerController;
+        [SerializeField] private GameObject player1StatsCanvas;
+        [SerializeField] private GameObject player2StatsCanvas;
 
         private struct SkillCostModifier
         {
@@ -40,6 +45,7 @@ namespace Main.Scripts
             // setCurrentHealth();
             // setDamage();
             // InitializePlayerStats();
+            _playerController = gameObject.GetComponent<PlayerController>();
         }
 
         private void Awake()
@@ -64,6 +70,7 @@ namespace Main.Scripts
             CurrentStamina = maxStamina;
             CurrentHealth = maxHealth;
             Debug.Log("CurrentStamina = " + CurrentStamina + " CurrentHealth = " + CurrentHealth);
+            UpdateStaminaHealthCanvas();
         }
 
         public void TakeDamage(int damage)
@@ -109,11 +116,13 @@ namespace Main.Scripts
         public void RegenHealth()
         {
             CurrentHealth = Mathf.Clamp(CurrentHealth + maxHealth % 10, 0f, maxHealth);
+            UpdateStaminaHealthCanvas();
         }
 
         public void RegenStamina()
         {
             CurrentStamina = Mathf.Clamp(CurrentStamina + maxStamina % 30, 0f, maxStamina);
+            UpdateStaminaHealthCanvas();
         }
 
 
@@ -161,6 +170,10 @@ namespace Main.Scripts
                 //sound
                 Die();
             }
+            else
+            {
+                UpdateStaminaHealthCanvas();
+            }
         }
 
         public void TakeDamageMedium()
@@ -173,6 +186,10 @@ namespace Main.Scripts
             {
                 //sound
                 Die();
+            }
+            else
+            {
+                UpdateStaminaHealthCanvas();
             }
         }
 
@@ -187,6 +204,76 @@ namespace Main.Scripts
             {
                 //sound
                 Die();
+            }
+            else
+            {
+                UpdateStaminaHealthCanvas();
+            }
+        }
+
+        private void UpdateStaminaHealthCanvas()
+        {
+            string player1HealthStr = "Player1Health";
+            string player2HealthStr = "Player2Health";
+            string player1StaminaStr = "Player1Stamina";
+            string player2StaminaStr = "Player2Stamina";
+
+            // Debug.LogError("TEST");
+            if (player1StatsCanvas.activeSelf && player2StatsCanvas.activeSelf)
+            {
+                // Debug.LogError("VAR");
+                switch (_playerController.GetPlayerNr())
+                {
+                    case PlayerController.PlayerNr.Player1:
+                        foreach (Transform child in player1StatsCanvas.transform)
+                        {
+                            // Check if the child GameObject has a Slider component and its name matches the target name
+                            Slider slider = child.GetComponent<Slider>();
+                            if (slider != null && child.gameObject.name == player1HealthStr)
+                            {
+                                Debug.LogError("Slider found: " + slider.gameObject.name);
+                                break;
+                            }
+                        }
+
+                        foreach (Transform child in player1StatsCanvas.transform)
+                        {
+                            // Check if the child GameObject has a Slider component and its name matches the target name
+                            Slider slider = child.GetComponent<Slider>();
+                            if (slider != null && child.gameObject.name == player1StaminaStr)
+                            {
+                                Debug.LogError("Slider found: " + slider.gameObject.name);
+                                break;
+                            }
+                        }
+
+                        break;
+                    case PlayerController.PlayerNr.Player2:
+
+                        foreach (Transform child in player2StatsCanvas.transform)
+                        {
+                            // Check if the child GameObject has a Slider component and its name matches the target name
+                            Slider slider = child.GetComponent<Slider>();
+                            if (slider != null && child.gameObject.name == player2HealthStr)
+                            {
+                                Debug.LogError("Slider found: " + slider.gameObject.name);
+                                break;
+                            }
+                        }
+
+                        foreach (Transform child in player2StatsCanvas.transform)
+                        {
+                            // Check if the child GameObject has a Slider component and its name matches the target name
+                            Slider slider = child.GetComponent<Slider>();
+                            if (slider != null && child.gameObject.name == player2StaminaStr)
+                            {
+                                Debug.LogError("Slider found: " + slider.gameObject.name);
+                                break;
+                            }
+                        }
+
+                        break;
+                }
             }
         }
     }

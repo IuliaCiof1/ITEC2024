@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 5955742178010400758}
   - component: {fileID: 6724299993784285898}
   m_Layer: 5
-  m_Name: Health
+  m_Name: Player1Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1912,7 +1912,7 @@ GameObject:
   - component: {fileID: 6679004278940914595}
   - component: {fileID: 6800615603428875350}
   m_Layer: 5
-  m_Name: Health
+  m_Name: Player2Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2342,7 +2342,7 @@ GameObject:
   - component: {fileID: 6019200884171646453}
   - component: {fileID: 3435865269540156975}
   m_Layer: 5
-  m_Name: Stamina
+  m_Name: Player1Stamina
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2434,7 +2434,7 @@ GameObject:
   - component: {fileID: 3945485350524703693}
   - component: {fileID: 221150731848656640}
   m_Layer: 5
-  m_Name: Stamina
+  m_Name: Player2Stamina
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
