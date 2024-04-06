@@ -52,13 +52,13 @@ namespace Main.Scripts
             {
                 keyWasPressed = true;
                 Debug.Log("Key A was pressed for player 1");
-                _rigidbody.AddForce(transform.forward * MoveMultiplier, ForceMode.Impulse);
+                _rigidbody.AddForce(-transform.forward * MoveMultiplier, ForceMode.Impulse);
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
                 keyWasPressed = true;
                 Debug.Log("Key S was pressed for player 1");
-                _rigidbody.AddForce(-transform.forward * MoveMultiplier, ForceMode.Impulse);
+                _rigidbody.AddForce(transform.forward * MoveMultiplier, ForceMode.Impulse);
             }
 
             if (keyWasPressed)
