@@ -11,9 +11,11 @@ namespace Main.Scripts
         }
 
         [SerializeField] private PlayerNr playerNr;
-
+        private Rigidbody _rigidbody;
+        private const float MoveMultiplier = 8f;
         void Start()
         {
+            _rigidbody = GetComponent<Rigidbody>();
         }
 
         void Update()
@@ -45,14 +47,21 @@ namespace Main.Scripts
 
         private void Player1InputHandler()
         {
-            bool KeyWasPressed = false;
+            bool keyWasPressed = false;
             if (Input.GetKeyDown(KeyCode.A))
             {
-                KeyWasPressed = true;
+                keyWasPressed = true;
                 Debug.Log("Key A was pressed for player 1");
+                _rigidbody.AddForce(transform.forward * MoveMultiplier, ForceMode.Impulse);
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                keyWasPressed = true;
+                Debug.Log("Key S was pressed for player 1");
+                _rigidbody.AddForce(-transform.forward * MoveMultiplier, ForceMode.Impulse);
             }
 
-            if (KeyWasPressed)
+            if (keyWasPressed)
             {
                 GameManager.Instance.ChangeState(GameManager.GameState.Player1ExecutingAction);
             }
@@ -61,10 +70,17 @@ namespace Main.Scripts
         private void Player2InputHandler()
         {
             bool keyWasPressed = false;
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.K))
             {
                 keyWasPressed = true;
-                Debug.Log("Key A was pressed for player 2");
+                Debug.Log("Key K was pressed for player 2");
+                _rigidbody.AddForce(transform.forward * MoveMultiplier, ForceMode.Impulse);
+            }
+            else if (Input.GetKeyDown(KeyCode.L))
+            {
+                keyWasPressed = true;
+                Debug.Log("Key L was pressed for player 2");
+                _rigidbody.AddForce(-transform.forward * MoveMultiplier, ForceMode.Impulse);
             }
 
             if (keyWasPressed)
