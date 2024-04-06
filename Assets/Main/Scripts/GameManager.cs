@@ -13,6 +13,7 @@ namespace Main.Scripts
         [SerializeField] private GameObject player1;
         [SerializeField] private GameObject player2;
         [SerializeField] private GameObject playerStatsCanvas;
+        [SerializeField] private GameObject backgroundMusic;
         private PlayerStats _player1Stats;
         private PlayerStats _player2Stats;
 
@@ -71,6 +72,7 @@ namespace Main.Scripts
                     }
                     _player1Stats.InitializePlayerStats();
                     _player2Stats.InitializePlayerStats();
+                    backgroundMusic.SetActive(true);
                     ChangeState(GameState.Player1Pending);
 
                     // Time.timeScale = 1f;
