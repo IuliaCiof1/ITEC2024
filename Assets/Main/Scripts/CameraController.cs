@@ -8,8 +8,8 @@ namespace Main.Scripts
         [SerializeField] private GameObject target;
         private const float SmoothSpeed = 0.125f;
         private readonly float _zOffset = 5f;
-        private float playersDistanceRation = 0.5f;
-        private float _heightOffset = 1f;
+        private float playersDistanceRation = 0.3f;
+        private float _heightOffset = 10f;
         private MiddlePointCalculator _middlePointCalculator;
 
         private void Start()

@@ -12,7 +12,7 @@ namespace Main.Scripts
 
         [SerializeField] private PlayerNr playerNr;
         private Rigidbody _rigidbody;
-        private const float MoveMultiplier = 9f;
+        private const float MoveMultiplier = 15f;
 
         void Start()
         {
