@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Main.Scripts
@@ -7,7 +8,6 @@ namespace Main.Scripts
     {
         public static GameManager Instance;
         [SerializeField] private GameObject startMenu;
-        // Start is called before the first frame update
 
         public enum GameState
         {
@@ -22,6 +22,9 @@ namespace Main.Scripts
         }
 
         private GameState _currentGameState;
+        private bool _player1StartedPerformingAction = false;
+        private bool _player2StartedPerformingAction = false;
+        private const float TimeToPerformAction = 1f;
 
         private void Awake()
         {
@@ -61,15 +64,25 @@ namespace Main.Scripts
                     Time.timeScale = 0f;
                     break;
                 case GameState.Player1ExecutingAction:
-                    Time.timeScale = 1f;
-                    ChangeState(GameState.Player2Pending);
+                    if (!_player1StartedPerformingAction)
+                    {
+                        Time.timeScale = 1f;
+                        _player1StartedPerformingAction = true;
+                        StartCoroutine(ChangeToPendingPlayerState());
+                    }
+
                     break;
                 case GameState.Player2Pending:
                     Time.timeScale = 0f;
                     break;
                 case GameState.Player2ExecutingAction:
-                    Time.timeScale = 1f;
-                    ChangeState(GameState.Player1Pending);
+                    if (!_player2StartedPerformingAction)
+                    {
+                        Time.timeScale = 1f;
+                        _player2StartedPerformingAction = true;
+                        StartCoroutine(ChangeToPendingPlayerState());
+                    }
+
                     break;
                 case GameState.RoundEnded:
                     Time.timeScale = 0f;
@@ -86,6 +99,29 @@ namespace Main.Scripts
             string newStateString = Enum.GetName(typeof(GameState), newState);
             Debug.Log("State changed: " + currentGameStateString + " -> " + newStateString);
             _currentGameState = newState;
+            switch (newState)
+            {
+                case GameState.Player1ExecutingAction:
+                    _player1StartedPerformingAction = false;
+                    break;
+                case GameState.Player2ExecutingAction:
+                    _player2StartedPerformingAction = false;
+                    break;
+            }
+        }
+
+        IEnumerator ChangeToPendingPlayerState()
+        {
+            yield return new WaitForSeconds(TimeToPerformAction);
+            switch (_currentGameState)
+            {
+                case GameState.Player1ExecutingAction:
+                    ChangeState(GameState.Player2Pending);
+                    break;
+                case GameState.Player2ExecutingAction:
+                    ChangeState(GameState.Player1Pending);
+                    break;
+            }
         }
 
         public GameState GetCurrentGameState()
