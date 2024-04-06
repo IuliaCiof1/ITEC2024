@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -119,7 +120,7 @@ namespace Main.Scripts
         //
         public void RegenHealth()
         {
-            CurrentHealth = Mathf.Clamp(CurrentHealth + maxHealth % 10, 0f, maxHealth);
+            CurrentHealth = Mathf.Clamp(CurrentHealth + maxHealth % 20, 0f, maxHealth);
             UpdateStaminaHealthCanvas();
         }
 
@@ -150,17 +151,20 @@ namespace Main.Scripts
         public void DecreaseStaminaWeakSkill()
         {
             CurrentStamina -= _lostStamina * SkillCostModifier.Weak + lostStaminaModif;
+            UpdateStaminaHealthCanvas();
         }
 
         public void DecreaseStaminaMediumSkill()
         {
             CurrentStamina -= _lostStamina * SkillCostModifier.Medium + lostStaminaModif;
+            UpdateStaminaHealthCanvas();
         }
 
 
         public void DecreaseStaminaStrongSkill()
         {
             CurrentStamina -= _lostStamina * SkillCostModifier.Strong + lostStaminaModif;
+            UpdateStaminaHealthCanvas();
         }
 
         public void TakeDamageWeak()
@@ -224,31 +228,32 @@ namespace Main.Scripts
             string player1StaminaStr = "Player1Stamina";
             string player2StaminaStr = "Player2Stamina";
 
-            // Debug.LogError("TEST");
+
+            string textHealthStr = "TextHealth";
+            string textStaminaStr = "TextStamina";
+
             if (player1StatsCanvas.activeSelf && player2StatsCanvas.activeSelf)
             {
-                // Debug.LogError("VAR");
+                // Sliders
                 switch (_playerController.GetPlayerNr())
                 {
                     case PlayerController.PlayerNr.Player1:
                         foreach (Transform child in player1StatsCanvas.transform)
                         {
-                            // Check if the child GameObject has a Slider component and its name matches the target name
                             Slider slider = child.GetComponent<Slider>();
                             if (slider != null && child.gameObject.name == player1HealthStr)
                             {
-                                Debug.LogError("Slider found: " + slider.gameObject.name);
+                                slider.value = CurrentHealth / maxHealth;
                                 break;
                             }
                         }
 
                         foreach (Transform child in player1StatsCanvas.transform)
                         {
-                            // Check if the child GameObject has a Slider component and its name matches the target name
                             Slider slider = child.GetComponent<Slider>();
                             if (slider != null && child.gameObject.name == player1StaminaStr)
                             {
-                                Debug.LogError("Slider found: " + slider.gameObject.name);
+                                slider.value = CurrentStamina / maxStamina;
                                 break;
                             }
                         }
@@ -258,22 +263,70 @@ namespace Main.Scripts
 
                         foreach (Transform child in player2StatsCanvas.transform)
                         {
-                            // Check if the child GameObject has a Slider component and its name matches the target name
                             Slider slider = child.GetComponent<Slider>();
                             if (slider != null && child.gameObject.name == player2HealthStr)
                             {
-                                Debug.LogError("Slider found: " + slider.gameObject.name);
+                                slider.value = CurrentHealth / maxHealth;
                                 break;
                             }
                         }
 
                         foreach (Transform child in player2StatsCanvas.transform)
                         {
-                            // Check if the child GameObject has a Slider component and its name matches the target name
                             Slider slider = child.GetComponent<Slider>();
                             if (slider != null && child.gameObject.name == player2StaminaStr)
                             {
-                                Debug.LogError("Slider found: " + slider.gameObject.name);
+                                slider.value = CurrentStamina / maxStamina;
+                                break;
+                            }
+                        }
+
+                        break;
+                }
+
+                // Texts
+                switch (_playerController.GetPlayerNr())
+                {
+                    case PlayerController.PlayerNr.Player1:
+                        foreach (Transform child in player1StatsCanvas.transform)
+                        {
+                            TMP_Text healthTxt = child.GetComponent<TMP_Text>();
+                            if (healthTxt != null && child.gameObject.name == textHealthStr)
+                            {
+                                healthTxt.text = string.Format("{0}/{1}", CurrentHealth, maxHealth);
+                                break;
+                            }
+                        }
+
+                        foreach (Transform child in player1StatsCanvas.transform)
+                        {
+                            TMP_Text staminaTxt = child.GetComponent<TMP_Text>();
+                            if (staminaTxt != null && child.gameObject.name == textStaminaStr)
+                            {
+                                staminaTxt.text = string.Format("{0}/{1}", CurrentStamina, maxStamina);
+                                break;
+                            }
+                        }
+
+                        break;
+                    case PlayerController.PlayerNr.Player2:
+
+                        foreach (Transform child in player2StatsCanvas.transform)
+                        {
+                            TMP_Text healthTxt = child.GetComponent<TMP_Text>();
+                            if (healthTxt != null && child.gameObject.name == textHealthStr)
+                            {
+                                healthTxt.text = string.Format("{0}/{1}", CurrentHealth, maxHealth);
+                                break;
+                            }
+                        }
+
+                        foreach (Transform child in player2StatsCanvas.transform)
+                        {
+                            TMP_Text staminaTxt = child.GetComponent<TMP_Text>();
+                            if (staminaTxt != null && child.gameObject.name == textStaminaStr)
+                            {
+                                staminaTxt.text = string.Format("{0}/{1}", CurrentStamina, maxStamina);
                                 break;
                             }
                         }
