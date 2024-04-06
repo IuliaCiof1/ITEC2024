@@ -19,8 +19,4 @@ namespace Main.Scripts
         }
     }
 
-    struct Weapons
-    {
-        static Weapon Sword = new Weapon(10f, 15f, -20f);
-    }
 }

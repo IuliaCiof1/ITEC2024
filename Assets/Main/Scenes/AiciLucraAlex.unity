@@ -863,7 +863,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b0202cf5bf87924f836483653d4e3c9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 13.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8b0202cf5bf87924f836483653d4e3c9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1044,12 +1044,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b590f7aeaeb4cb24199e1744d7103488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraShake: {fileID: 29985751}
   maxHealth: 100
-  damage: 0
   maxStamina: 100
+  player1StatsCanvas: {fileID: 0}
+  player2StatsCanvas: {fileID: 0}
+  camFollow: {fileID: 0}
   deathSource: {fileID: 675720513}
   clip: {fileID: 8300000, guid: b41814e953508a04d9857a33ebc78c71, type: 3}
+  lightHitClip: {fileID: 0}
+  highHitClip: {fileID: 0}
 --- !u!1 &1980600944
 GameObject:
   m_ObjectHideFlags: 0
