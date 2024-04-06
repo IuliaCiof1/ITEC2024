@@ -1149,7 +1149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f5193d7858458444838874478d68288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LostStaminaModifier: 0
+  LostStaminaModifier: -8
   DamageModifier: 0
   HealthModifier: 0
 --- !u!1 &3333082202588018310
@@ -3118,9 +3118,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f5193d7858458444838874478d68288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LostStaminaModifier: 0
-  DamageModifier: 0
-  HealthModifier: 0
+  LostStaminaModifier: 50
+  DamageModifier: 25
+  HealthModifier: -20
 --- !u!1 &8656987652043534507
 GameObject:
   m_ObjectHideFlags: 0
@@ -3466,9 +3466,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f5193d7858458444838874478d68288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LostStaminaModifier: 0
-  DamageModifier: 0
-  HealthModifier: 0
+  LostStaminaModifier: 5
+  DamageModifier: 8
+  HealthModifier: -15
 --- !u!1001 &367770430964423097
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3599,9 +3599,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f5193d7858458444838874478d68288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LostStaminaModifier: 0
-  DamageModifier: 0
-  HealthModifier: 0
+  LostStaminaModifier: 40
+  DamageModifier: 18
+  HealthModifier: -10
 --- !u!1001 &837323787780938073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3805,9 +3805,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f5193d7858458444838874478d68288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LostStaminaModifier: 0
-  DamageModifier: 0
-  HealthModifier: 0
+  LostStaminaModifier: 25
+  DamageModifier: -4
+  HealthModifier: 100
 --- !u!4 &2004156056203544394 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 38a05f69dfed31a44a83ae3ed86dbf1b, type: 3}
@@ -3911,8 +3911,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f5193d7858458444838874478d68288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LostStaminaModifier: 0
-  DamageModifier: 0
+  LostStaminaModifier: -10
+  DamageModifier: 15
   HealthModifier: 0
 --- !u!1001 &4548573566675852923
 PrefabInstance:
@@ -4093,8 +4093,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f5193d7858458444838874478d68288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LostStaminaModifier: 0
-  DamageModifier: 0
+  LostStaminaModifier: 25
+  DamageModifier: 15
   HealthModifier: 0
 --- !u!4 &6631345688846245931 stripped
 Transform:

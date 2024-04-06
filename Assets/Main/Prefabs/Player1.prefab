@@ -881,9 +881,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f5193d7858458444838874478d68288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LostStaminaModifier: 0
-  DamageModifier: 0
-  HealthModifier: 0
+  LostStaminaModifier: 5
+  DamageModifier: 8
+  HealthModifier: -15
 --- !u!1 &2091309879134647547
 GameObject:
   m_ObjectHideFlags: 0
@@ -2029,7 +2029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f5193d7858458444838874478d68288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LostStaminaModifier: 0
+  LostStaminaModifier: -8
   DamageModifier: 0
   HealthModifier: 0
 --- !u!1 &6456659658598381670
@@ -2695,9 +2695,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f5193d7858458444838874478d68288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LostStaminaModifier: 0
-  DamageModifier: 0
-  HealthModifier: 0
+  LostStaminaModifier: 50
+  DamageModifier: 25
+  HealthModifier: -20
 --- !u!1 &8487661426156780650
 GameObject:
   m_ObjectHideFlags: 0
@@ -3652,9 +3652,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f5193d7858458444838874478d68288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LostStaminaModifier: 0
-  DamageModifier: 0
-  HealthModifier: 0
+  LostStaminaModifier: 25
+  DamageModifier: -4
+  HealthModifier: 100
 --- !u!4 &4389382750859583544 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 38a05f69dfed31a44a83ae3ed86dbf1b, type: 3}
@@ -3758,8 +3758,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f5193d7858458444838874478d68288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LostStaminaModifier: 0
-  DamageModifier: 0
+  LostStaminaModifier: 25
+  DamageModifier: 15
   HealthModifier: 0
 --- !u!1001 &6504173617171297332
 PrefabInstance:
@@ -3996,9 +3996,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f5193d7858458444838874478d68288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LostStaminaModifier: 0
-  DamageModifier: 0
-  HealthModifier: 0
+  LostStaminaModifier: 40
+  DamageModifier: 18
+  HealthModifier: -10
 --- !u!4 &6605570843180422202 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8b0202cf5bf87924f836483653d4e3c9, type: 3}
@@ -4102,6 +4102,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f5193d7858458444838874478d68288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LostStaminaModifier: 0
-  DamageModifier: 0
+  LostStaminaModifier: -10
+  DamageModifier: 15
   HealthModifier: 0
