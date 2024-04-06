@@ -9,6 +9,7 @@ namespace Main.Scripts
         private const float SmoothSpeed = 0.125f;
         private readonly float _zOffset = 5f;
         private float playersDistanceRation = 0.5f;
+        private float _heightOffset = 1f;
         private MiddlePointCalculator _middlePointCalculator;
 
         private void Start()
@@ -27,7 +28,7 @@ namespace Main.Scripts
 
                 Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, SmoothSpeed);
 
-                transform.position = new Vector3(smoothedPosition.x, transform.position.y,
+                transform.position = new Vector3(smoothedPosition.x, desiredPosition.y + _heightOffset,
                     _middlePointCalculator.GetDistanceBetweenPlayers() * playersDistanceRation + _zOffset);
             }
         }
