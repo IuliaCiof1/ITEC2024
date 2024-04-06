@@ -8,6 +8,8 @@ namespace Main.Scripts
     {
         public static GameManager Instance;
         [SerializeField] private GameObject startMenu;
+        [SerializeField] private GameObject player1Canvas;
+        [SerializeField] private GameObject player2Canvas;
 
         public enum GameState
         {
@@ -42,6 +44,8 @@ namespace Main.Scripts
         {
             _currentGameState = GameState.StartMenu;
             startMenu.SetActive(true);
+            player1Canvas.SetActive(false);
+            player2Canvas.SetActive(false);
         }
 
         // Update is called once per frame
@@ -62,6 +66,11 @@ namespace Main.Scripts
                     break;
                 case GameState.Player1Pending:
                     Time.timeScale = 0f;
+                    if (!player1Canvas.activeSelf)
+                    {
+                        player1Canvas.SetActive(true);
+                    }
+
                     break;
                 case GameState.Player1ExecutingAction:
                     if (!_player1StartedPerformingAction)
@@ -69,11 +78,21 @@ namespace Main.Scripts
                         Time.timeScale = 1f;
                         _player1StartedPerformingAction = true;
                         StartCoroutine(ChangeToPendingPlayerState());
+
+                        if (player1Canvas.activeSelf)
+                        {
+                            player1Canvas.SetActive(false);
+                        }
                     }
 
                     break;
                 case GameState.Player2Pending:
                     Time.timeScale = 0f;
+                    if (!player2Canvas.activeSelf)
+                    {
+                        player2Canvas.SetActive(true);
+                    }
+
                     break;
                 case GameState.Player2ExecutingAction:
                     if (!_player2StartedPerformingAction)
@@ -81,6 +100,10 @@ namespace Main.Scripts
                         Time.timeScale = 1f;
                         _player2StartedPerformingAction = true;
                         StartCoroutine(ChangeToPendingPlayerState());
+                        if (player2Canvas.activeSelf)
+                        {
+                            player2Canvas.SetActive(false);
+                        }
                     }
 
                     break;

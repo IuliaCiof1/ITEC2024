@@ -655,6 +655,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1673418799 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9111821793688732860, guid: 3df15f0c0fc2f4a4ca9b66afd589b64b, type: 3}
+  m_PrefabInstance: {fileID: 881023577}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1833265348 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6497260259183556168, guid: b8a8013ea6c9bf446b3c057d8b7f2c61, type: 3}
@@ -908,6 +913,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a96f16bf1b537774a89deb98d7e24d06, type: 3}
+--- !u!1 &5906767418532411322 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3435687245865445841, guid: a96f16bf1b537774a89deb98d7e24d06, type: 3}
+  m_PrefabInstance: {fileID: 5906767418532411321}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7403862890624075425
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -920,6 +930,14 @@ PrefabInstance:
       propertyPath: startMenu
       value: 
       objectReference: {fileID: 1833265348}
+    - target: {fileID: 5868652460685061085, guid: 229c42c1230f5c4468bb3759f12edaa0, type: 3}
+      propertyPath: player1Canvas
+      value: 
+      objectReference: {fileID: 1673418799}
+    - target: {fileID: 5868652460685061085, guid: 229c42c1230f5c4468bb3759f12edaa0, type: 3}
+      propertyPath: player2Canvas
+      value: 
+      objectReference: {fileID: 5906767418532411322}
     - target: {fileID: 5923453382873480414, guid: 229c42c1230f5c4468bb3759f12edaa0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.52002
