@@ -51,7 +51,7 @@ namespace Main.Scripts
         {
             // setCurrentHealth();
             // setDamage();
-            // InitializePlayerStats();
+            //InitializePlayerStats();
             _playerController = gameObject.GetComponent<PlayerController>();
         }
 
@@ -180,6 +180,12 @@ namespace Main.Scripts
         {
             CurrentStamina -= _lostStamina * SkillCostModifier.Strong + lostStaminaModif;
             UpdateStaminaHealthCanvas();
+        }
+
+        public void setModifs(int dmgModif, int hpModif, int lStaminaModif) {
+            damageModif = dmgModif;
+            healthModif = hpModif;
+            lostStaminaModif = lStaminaModif;
         }
 
         public void TakeDamageWeak()

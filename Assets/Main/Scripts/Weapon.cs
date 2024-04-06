@@ -4,14 +4,14 @@ namespace Main.Scripts
 {
     public class Weapon : MonoBehaviour
     {
-        public float LostStaminaModifier;
-        public float DamageModifier;
-        public float HealthModifier;
+        public int LostStaminaModifier;
+        public int DamageModifier;
+        public int HealthModifier;
 
         public Weapon()
         {
         }
-        public Weapon(float lostStaminaModifier, float damageModifier, float healthModifier)
+        public Weapon(int lostStaminaModifier, int damageModifier, int healthModifier)
         {
             LostStaminaModifier = lostStaminaModifier;
             DamageModifier = damageModifier;

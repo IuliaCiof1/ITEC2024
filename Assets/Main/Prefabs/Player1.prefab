@@ -341,6 +341,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7978535729948691645}
+  - component: {fileID: 5418964558725039316}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -361,8 +362,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6980667944023327534}
   - {fileID: 7056750466411192346}
+  - {fileID: 6980667944023327534}
   - {fileID: 2596314620182856593}
   - {fileID: 4389382750859583544}
   - {fileID: 5082970969046948833}
@@ -370,6 +371,19 @@ Transform:
   - {fileID: 646773023467114965}
   m_Father: {fileID: 3727960819658793241}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5418964558725039316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534453809683083538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ec9b3dfa32407846903e9ba91ecfb47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
 --- !u!1 &665818777745590750
 GameObject:
   m_ObjectHideFlags: 0
