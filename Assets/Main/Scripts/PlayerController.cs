@@ -97,26 +97,26 @@ namespace Main.Scripts
             bool keyWasPressed = false;
             if (inputEnabled)
             {
-                if (Input.GetKeyDown(KeyCode.K))
+                if (Input.GetKeyDown(KeyCode.O))
                 {
                     keyWasPressed = true;
                     _rigidbody.AddForce(transform.forward * MoveMultiplier, ForceMode.Impulse);
                 }
-                else if (Input.GetKeyDown(KeyCode.L)) // move back + regen
+                else if (Input.GetKeyDown(KeyCode.P)) // move back + regen
                 {
                     keyWasPressed = true;
                     _playerStats.RegenStamina();
                     _rigidbody.AddForce(-transform.forward * MoveMultiplier, ForceMode.Impulse);
                 }
-                else if (Input.GetKeyDown(KeyCode.I)) // Weak attack
+                else if (Input.GetKeyDown(KeyCode.L)) // Weak attack
                 {
                     keyWasPressed = _combatManager.PerformWeakAttack();
                 }
-                else if (Input.GetKeyDown(KeyCode.O)) // Mid attack
+                else if (Input.GetKeyDown(KeyCode.K)) // Mid attack
                 {
                     keyWasPressed = _combatManager.PerformMediumAttack();
                 }
-                else if (Input.GetKeyDown(KeyCode.P)) // Strong attack
+                else if (Input.GetKeyDown(KeyCode.J)) // Strong attack
                 {
                     keyWasPressed = _combatManager.PerformStrongAttack();
                 }
