@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: 
   contentImage: {fileID: 21300000, guid: 962824fc781395c42bf939aab4b0e3e5, type: 3}
-  description: You will have +10  health at the beggining of the next round
+  description: You won the LightSaber:<br> - 10 Stamina Cost/Hit<br> - 15 Damage<br>
   healthEffect: 10
   isHealthPositive: 1
   staminaEffect: 0

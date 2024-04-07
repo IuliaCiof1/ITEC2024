@@ -16,4 +16,8 @@ public class CardsSO : ScriptableObject
 
     public int weaponIndex;
     public GameObject weapon;
+    //public int lost_stamina;
+    //public int damage;
+    //public int health;
+
 }
