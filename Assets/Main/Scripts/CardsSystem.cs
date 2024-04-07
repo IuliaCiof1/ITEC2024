@@ -9,7 +9,7 @@ namespace Main.Scripts
         //[SerializeField] GameObject cardsCanvas;
         List<Card> cards;
         [SerializeField] List<CardsSO> powerCard;
-
+        [SerializeField] Transform cardsHolder;
         public bool cardTurned = false;
 
         private void Start()
@@ -22,7 +22,7 @@ namespace Main.Scripts
             cardTurned = false;
             cards = new List<Card>();
 
-            foreach (Transform card in transform)
+            foreach (Transform card in cardsHolder)
             {
                 Card cardComp = card.GetComponent<Card>();
                 if (cardComp != null)
