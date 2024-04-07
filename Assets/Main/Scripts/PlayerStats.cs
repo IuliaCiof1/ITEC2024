@@ -64,11 +64,6 @@ namespace Main.Scripts
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                TakeDamage(30);
-                camFollow.ShakeCamera(4f);
-            }
         }
 
         public void InitializePlayerStats()
@@ -76,21 +71,6 @@ namespace Main.Scripts
             CurrentStamina = maxStamina;
             CurrentHealth = maxHealth + healthModif;
             UpdateStaminaHealthCanvas();
-        }
-
-        public void TakeDamage(int damage)
-        {
-            CurrentHealth -= damage;
-            if (CurrentHealth <= 0)
-            {
-                //sound
-                Die();
-            }
-        }
-
-        public void decreaseStamina()
-        {
-            CurrentStamina -= _lostStamina;
         }
 
         public void Die()
@@ -101,22 +81,6 @@ namespace Main.Scripts
             StartCoroutine(IncrementWinnerCounter());
         }
 
-        //
-        // public void setCurrentHealth()
-        // {
-        //     CurrentHealth = maxHealth + healthModif;
-        // }
-        //
-        // public void setDamage()
-        // {
-        //     damage = baseDamage + damageModif;
-        // }
-        //
-        // public void setLostStamina()
-        // {
-        //     _lostStamina += _lostStamina + lostStaminaModif;
-        // }
-        //
         IEnumerator IncrementWinnerCounter()
         {
             yield return new WaitForSeconds(timeToWaitForDeathAnimation);
@@ -175,7 +139,8 @@ namespace Main.Scripts
             UpdateStaminaHealthCanvas();
         }
 
-        public void setModifs(int dmgModif, int hpModif, int lStaminaModif) {
+        public void setModifs(int dmgModif, int hpModif, int lStaminaModif)
+        {
             damageModif = dmgModif;
             healthModif = hpModif;
             lostStaminaModif = lStaminaModif;

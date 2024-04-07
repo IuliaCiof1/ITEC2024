@@ -16,6 +16,9 @@ namespace Main.Scripts
         [SerializeField] private GameObject cardsCanvas;
         [SerializeField] private GameObject playerStatsCanvas;
         [SerializeField] private GameObject backgroundMusic;
+        [SerializeField] private GameObject endGameCanvas;
+        [SerializeField] private TextMeshProUGUI endGameTxt1;
+        [SerializeField] private TextMeshProUGUI endGameTxt2;
         [SerializeField] private TextMeshProUGUI player1WinText;
         [SerializeField] private TextMeshProUGUI player2WinText;
         private PlayerStats _player1Stats;
@@ -65,6 +68,7 @@ namespace Main.Scripts
             startMenu.SetActive(true);
             player1Canvas.SetActive(false);
             player2Canvas.SetActive(false);
+            endGameCanvas.SetActive(false);
             cardsCanvas.SetActive(false);
             _player1Stats = player1.GetComponent<PlayerStats>();
             _player2Stats = player2.GetComponent<PlayerStats>();
@@ -91,6 +95,11 @@ namespace Main.Scripts
                     if (cardsCanvas.activeSelf)
                     {
                         cardsCanvas.SetActive(false);
+                    }
+
+                    if (endGameCanvas.activeSelf)
+                    {
+                        endGameCanvas.SetActive(false);
                     }
 
                     _player1Stats.InitializePlayerStats();
@@ -213,7 +222,24 @@ namespace Main.Scripts
 
                     break;
                 case GameState.GameFinished:
-                    // Time.timeScale = 0f;
+                    if (!endGameCanvas.activeSelf)
+                    {
+                        endGameCanvas.SetActive(true);
+                        if (endGameTxt1 != null && endGameTxt2 != null)
+                        {
+                            if (player1WinCounter > player2WinCounter)
+                            {
+                                endGameTxt1.text = "Decebal won";
+                                endGameTxt2.text = "Decebal won";
+                            }
+                            else
+                            {
+                                endGameTxt1.text = "Trajan won";
+                                endGameTxt2.text = "Trajan won";
+                            }
+                        }
+                    }
+
                     break;
             }
         }
@@ -276,6 +302,8 @@ namespace Main.Scripts
         public void StartButtonPressed()
         {
             startMenu.SetActive(false);
+            player1WinCounter = 0;
+            player2WinCounter = 0;
             ChangeState(GameState.RoundStart);
         }
 
@@ -291,6 +319,7 @@ namespace Main.Scripts
             {
                 player1WinText.text = string.Format("Wins: {0:0}", player1WinCounter);
             }
+
             if (player2Canvas.activeSelf && player2WinText)
             {
                 player2WinText.text = string.Format("Wins: {0:0}", player2WinCounter);
@@ -304,6 +333,7 @@ namespace Main.Scripts
             {
                 player1WinText.text = string.Format("Wins: {0:0}", player1WinCounter);
             }
+
             if (player2Canvas.activeSelf && player2WinText)
             {
                 player2WinText.text = string.Format("Wins: {0:0}", player2WinCounter);
