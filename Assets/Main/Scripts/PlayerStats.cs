@@ -13,7 +13,7 @@ namespace Main.Scripts
         public float CurrentHealth { get; private set; }
         private int healthModif = 0;
 
-        private int baseDamage = 80;
+        private int baseDamage = 20;
         private int damageModif = 0;
 
         public int maxStamina = 100;
