@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 786513451503930667}
   - component: {fileID: 5176887332331122022}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: TitleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -252,12 +252,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ee4899c12d87db4092dd8ff52363eb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  badCard:
-  - {fileID: 11400000, guid: ca434159cbcee7a46a6b6d6e15ac9894, type: 2}
-  weakCard: []
   powerCard:
-  - {fileID: 11400000, guid: c36d947ab43b0ca469cc3e93a2decb6b, type: 2}
-  - {fileID: 11400000, guid: 53865d7a64a8c4b4f8a4b33fe6c49764, type: 2}
+  - {fileID: 11400000, guid: 1e77eff87505df343ae18ba9e8d184ba, type: 2}
+  - {fileID: 11400000, guid: 943d7b8a66031a444803ef11d91adb49, type: 2}
+  - {fileID: 11400000, guid: 653c12b5990b8ff4b848fca74a85aa6f, type: 2}
+  - {fileID: 11400000, guid: ec150b0275a2948498554934197ac217, type: 2}
+  - {fileID: 11400000, guid: 8964db6d385345b4ea999c2d804c3a7c, type: 2}
+  - {fileID: 11400000, guid: 5751901bea8bb894885f2bf3a5fd4469, type: 2}
+  - {fileID: 11400000, guid: 3cb5f71ae1e5d56469dcc1e97da68b60, type: 2}
   cardTurned: 0
 --- !u!1001 &1742421323069994824
 PrefabInstance:

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 namespace Main.Scripts
@@ -17,6 +18,7 @@ namespace Main.Scripts
         [SerializeField] private GameObject backgroundMusic;
         private PlayerStats _player1Stats;
         private PlayerStats _player2Stats;
+        private CardsSystem _cardsSystem;
         private int player1WinCounter = 0;
         private int player2WinCounter = 0;
         private int maxNumberOfRounds = 5;
@@ -33,6 +35,8 @@ namespace Main.Scripts
             Player2Pending,
             Player2ExecutingAction,
             RoundEnded,
+            SelectWeaponPlayer1,
+            SelectWeaponPlayer2,
             GameFinished
         }
 
@@ -152,6 +156,7 @@ namespace Main.Scripts
                     {
                         player1Canvas.SetActive(false);
                     }
+
                     if (player2Canvas.activeSelf)
                     {
                         player2Canvas.SetActive(false);
@@ -163,7 +168,45 @@ namespace Main.Scripts
                     }
                     else
                     {
-                        ChangeState(GameState.RoundStart);
+                        ChangeState(GameState.SelectWeaponPlayer1);
+                    }
+
+                    break;
+                case GameState.SelectWeaponPlayer1:
+                    if (!cardsCanvas.activeSelf)
+                    {
+                        cardsCanvas.SetActive(true);
+                        TextMeshProUGUI[] textMeshProsP1 = cardsCanvas.GetComponentsInChildren<TextMeshProUGUI>();
+                        foreach (TextMeshProUGUI textMeshPro in textMeshProsP1)
+                        {
+                            if (textMeshPro.gameObject.name == "TitleText")
+                            {
+                                textMeshPro.text = "<b>Player 1</b>, choose a card";
+                                break;
+                            }
+                        }
+
+                        _cardsSystem = cardsCanvas.GetComponent<CardsSystem>();
+                        _cardsSystem.InitializeCardSystem();
+                    }
+
+                    break;
+                case GameState.SelectWeaponPlayer2:
+                    if (!cardsCanvas.activeSelf)
+                    {
+                        cardsCanvas.SetActive(true);
+                        TextMeshProUGUI[] textMeshProsP2 = cardsCanvas.GetComponentsInChildren<TextMeshProUGUI>();
+                        foreach (TextMeshProUGUI textMeshPro in textMeshProsP2)
+                        {
+                            if (textMeshPro.gameObject.name == "TitleText")
+                            {
+                                textMeshPro.text = "<b>Player 2</b>, choose a card";
+                                break;
+                            }
+                        }
+
+                        _cardsSystem = cardsCanvas.GetComponent<CardsSystem>();
+                        _cardsSystem.InitializeCardSystem();
                     }
 
                     break;
@@ -175,7 +218,9 @@ namespace Main.Scripts
 
         public void ChangeState(GameState newState)
         {
-            if (_onePlayerDied && (newState != GameState.RoundEnded) && (newState != GameState.GameFinished) && (newState != GameState.RoundStart)) return;
+            if (_onePlayerDied && (newState != GameState.RoundEnded) && (newState != GameState.GameFinished) &&
+                (newState != GameState.RoundStart) && (newState != GameState.SelectWeaponPlayer1) &&
+                (newState != GameState.SelectWeaponPlayer2)) return;
             string currentGameStateString = Enum.GetName(typeof(GameState), _currentGameState);
             string newStateString = Enum.GetName(typeof(GameState), newState);
             Debug.Log("State changed: " + currentGameStateString + " -> " + newStateString);
@@ -201,6 +246,22 @@ namespace Main.Scripts
                     break;
                 case GameState.Player2ExecutingAction:
                     ChangeState(GameState.Player1Pending);
+                    break;
+            }
+        }
+
+        IEnumerator CloseSelectWeaponState()
+        {
+            yield return new WaitForSeconds(5);
+            switch (_currentGameState)
+            {
+                case GameState.SelectWeaponPlayer1:
+                    ChangeState(GameState.SelectWeaponPlayer2);
+                    cardsCanvas.SetActive(false);
+                    break;
+                case GameState.SelectWeaponPlayer2:
+                    ChangeState(GameState.RoundStart);
+                    cardsCanvas.SetActive(false);
                     break;
             }
         }
@@ -234,6 +295,35 @@ namespace Main.Scripts
         public void PlayerDied()
         {
             _onePlayerDied = true;
+        }
+
+        public void UpdateWeaponOnPlayer(int weaponIndex)
+        {
+            switch (_currentGameState)
+            {
+                case GameState.SelectWeaponPlayer1:
+                {
+                    WeaponManager weaponManager = player1.GetComponentInChildren<WeaponManager>();
+                    if (weaponManager != null)
+                    {
+                        weaponManager.NewWeapon(weaponIndex);
+                    }
+
+                    StartCoroutine(CloseSelectWeaponState());
+                }
+                    break;
+                case GameState.SelectWeaponPlayer2:
+                {
+                    WeaponManager weaponManager = player2.GetComponentInChildren<WeaponManager>();
+                    if (weaponManager != null)
+                    {
+                        weaponManager.NewWeapon(weaponIndex);
+                    }
+
+                    StartCoroutine(CloseSelectWeaponState());
+                }
+                    break;
+            }
         }
     }
 }

@@ -14,6 +14,6 @@ public class CardsSO : ScriptableObject
     public int staminaEffect;
     public bool isStaminahPositive;
 
-
+    public int weaponIndex;
     public GameObject weapon;
 }

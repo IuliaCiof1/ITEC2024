@@ -247,6 +247,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 88696901816331307, guid: e12ba62aa1dd14b43a302d6f0ee4de6c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 88696901816331307, guid: e12ba62aa1dd14b43a302d6f0ee4de6c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Main.Scripts.Card, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4099350453861745758, guid: e12ba62aa1dd14b43a302d6f0ee4de6c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 4099350453861745758, guid: e12ba62aa1dd14b43a302d6f0ee4de6c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Main.Scripts.Card, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5738014956689988814, guid: e12ba62aa1dd14b43a302d6f0ee4de6c, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -330,6 +346,14 @@ PrefabInstance:
     - target: {fileID: 7832621974885490768, guid: e12ba62aa1dd14b43a302d6f0ee4de6c, type: 3}
       propertyPath: m_Name
       value: CardsCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428936877325338916, guid: e12ba62aa1dd14b43a302d6f0ee4de6c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428936877325338916, guid: e12ba62aa1dd14b43a302d6f0ee4de6c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Main.Scripts.Card, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

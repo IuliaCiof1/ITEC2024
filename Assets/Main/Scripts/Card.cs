@@ -11,6 +11,7 @@ namespace Main.Scripts
         [SerializeField] TMP_Text descriptionText;
         [SerializeField] Image contentImage;
         private CardsSystem _cardSystem;
+        private int _weaponIndex;
 
         GameObject front, back;
 
@@ -19,11 +20,18 @@ namespace Main.Scripts
 
         private void Start()
         {
+            InitializeCard();
+        }
+
+        public void InitializeCard()
+        {
             front = transform.GetChild(0).gameObject;
             back = transform.GetChild(1).gameObject;
 
             back.SetActive(true);
             front.SetActive(false);
+            cardTurned = false;
+            thisCardTurned = false;
 
             _cardSystem = GetComponentInParent<CardsSystem>();
             print(_cardSystem.name);
@@ -31,7 +39,7 @@ namespace Main.Scripts
 
         private void Update()
         {
-            Debug.Log("_cardSystem.cardTurned = " + _cardSystem.cardTurned);
+            // Debug.Log("_cardSystem.cardTurned = " + _cardSystem.cardTurned);
         }
 
         //public ChangeThisCardTurned()
@@ -44,6 +52,7 @@ namespace Main.Scripts
             contentImage.sprite = cardSO.contentImage;
             contentImage.enabled = true;
             descriptionText.text = cardSO.description;
+            _weaponIndex = cardSO.weaponIndex;
         }
 
         public void TurnCard()
@@ -55,11 +64,13 @@ namespace Main.Scripts
                 StartCoroutine(RotateCardSmooth());
                 _cardSystem.cardTurned = true;
                 thisCardTurned = true;
+                Debug.Log("!_cardSystem.cardTurned");
             }
             else if (!thisCardTurned)
             {
                 //StartCoroutine(Delay());
                 StartCoroutine(RotateCardSmooth());
+                Debug.Log("!thisCardTurned");
             }
 
             //Vector3 rotateTo = new Vector3(transform.rotation.x, 90, transform.rotation.z);
@@ -105,6 +116,7 @@ namespace Main.Scripts
         {
             if (thisCardTurned) return;
             TurnCard();
+            GameManager.Instance.UpdateWeaponOnPlayer(_weaponIndex);
         }
     }
 }

@@ -8,21 +8,28 @@ namespace Main.Scripts
     {
         //[SerializeField] GameObject cardsCanvas;
         List<Card> cards;
-
-        [SerializeField] List<CardsSO> badCard;
-        [SerializeField] List<CardsSO> weakCard;
         [SerializeField] List<CardsSO> powerCard;
 
         public bool cardTurned = false;
 
         private void Start()
         {
+            // InitializeCardSystem();
+        }
+
+        public void InitializeCardSystem()
+        {
+            cardTurned = false;
             cards = new List<Card>();
 
             foreach (Transform card in transform)
             {
-                if (card.GetComponent<Card>())
-                    cards.Add(card.GetComponent<Card>());
+                Card cardComp = card.GetComponent<Card>();
+                if (cardComp != null)
+                {
+                    cardComp.InitializeCard();
+                    cards.Add(cardComp);
+                }
             }
 
             GenerateCardSet();
@@ -30,57 +37,23 @@ namespace Main.Scripts
 
         void GenerateCardSet()
         {
-            //Winner set
-            List<int> cardIndex = new List<int> { 0, 1, 2 };
             List<int> prizeIndex = new List<int>();
-
-            for (int i = 0; i < badCard.Count; i++)
-            {
-                prizeIndex.Add(i);
-            }
-
-            int randomCard = Random.Range(0, cardIndex.Count);
-            int randomPrize = Random.Range(0, prizeIndex.Count);
-            print(randomCard + " " + randomPrize + " " + cards[randomCard] + " " + badCard[randomPrize]);
-            cards[cardIndex.IndexOf(randomCard)].CreateCard(badCard[prizeIndex.IndexOf(randomPrize)]);
-            cardIndex.RemoveAt(randomCard);
-
-
-            prizeIndex.Clear();
             for (int i = 0; i < powerCard.Count; i++)
             {
                 prizeIndex.Add(i);
             }
 
-            randomCard = Random.Range(0, cardIndex.Count);
-            print(cardIndex.Count);
-
-            randomPrize = Random.Range(0, prizeIndex.Count);
-            print(randomCard + " " + randomPrize + " " + cardIndex.IndexOf(randomCard) + " " +
-                  powerCard[prizeIndex.IndexOf(randomPrize)]);
-
-            print(randomCard + " " + randomPrize);
-            cards[cardIndex.IndexOf(randomCard)].CreateCard(powerCard[prizeIndex.IndexOf(randomPrize)]);
-
-            cardIndex.RemoveAt(randomCard);
+            int randomPrize = Random.Range(0, prizeIndex.Count);
+            cards[0].CreateCard(powerCard[prizeIndex[randomPrize]]);
             prizeIndex.RemoveAt(randomPrize);
 
-
-            print(cardIndex);
-
-
-            randomCard = Random.Range(0, cardIndex.Count);
-            print(cardIndex.Count);
-
             randomPrize = Random.Range(0, prizeIndex.Count);
-            print(randomCard + " " + randomPrize + " " + cards[randomCard] + " " + powerCard[randomPrize]);
-
-            print(randomCard + " " + randomPrize);
-            cards[cardIndex.IndexOf(randomCard)].CreateCard(powerCard[prizeIndex.IndexOf(randomPrize)]);
-            cardIndex.RemoveAt(randomCard);
+            cards[1].CreateCard(powerCard[prizeIndex[randomPrize]]);
             prizeIndex.RemoveAt(randomPrize);
 
-            //Loser set
+            randomPrize = Random.Range(0, prizeIndex.Count);
+            cards[2].CreateCard(powerCard[prizeIndex[randomPrize]]);
+            prizeIndex.RemoveAt(randomPrize);
         }
 
 
@@ -100,10 +73,20 @@ namespace Main.Scripts
 
         IEnumerator Delay(Card card)
         {
-            // print("before 10 seconds");
             yield return new WaitForSeconds(2f);
             card.TurnCard();
-            // print("after 10 seconds");
+        }
+
+        public void TurnBackAllCards()
+        {
+            foreach (Card card in cards)
+            {
+                card.InitializeCard();
+                card.TurnCard();
+                card.InitializeCard();
+            }
+
+            cardTurned = false;
         }
     }
 }

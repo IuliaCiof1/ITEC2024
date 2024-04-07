@@ -39,7 +39,6 @@ public class BackgroundMusic : MonoBehaviour
         while (time < duration)
         {
             string fadeSituation = fadeIn ? "fadeIn" : "fadeOut";
-            Debug.Log(fadeSituation);
             time += Time.deltaTime;
             source.volume = Mathf.Lerp(startVol, targetVolume, time / duration);
             yield return null;
