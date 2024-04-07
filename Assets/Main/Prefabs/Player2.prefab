@@ -3132,7 +3132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LostStaminaModifier: 50
-  DamageModifier: 25
+  DamageModifier: 50
   HealthModifier: -20
 --- !u!1 &8656987652043534507
 GameObject:
@@ -3820,7 +3820,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LostStaminaModifier: 25
   DamageModifier: -4
-  HealthModifier: 100
+  HealthModifier: 50
 --- !u!4 &2004156056203544394 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 38a05f69dfed31a44a83ae3ed86dbf1b, type: 3}
