@@ -16,6 +16,8 @@ namespace Main.Scripts
         [SerializeField] private GameObject cardsCanvas;
         [SerializeField] private GameObject playerStatsCanvas;
         [SerializeField] private GameObject backgroundMusic;
+        [SerializeField] private TextMeshProUGUI player1WinText;
+        [SerializeField] private TextMeshProUGUI player2WinText;
         private PlayerStats _player1Stats;
         private PlayerStats _player2Stats;
         private CardsSystem _cardsSystem;
@@ -285,11 +287,27 @@ namespace Main.Scripts
         public void setPlayer1WinCounter()
         {
             player1WinCounter++;
+            if (player1Canvas.activeSelf && player1WinText)
+            {
+                player1WinText.text = string.Format("Wins: {0:0}", player1WinCounter);
+            }
+            if (player2Canvas.activeSelf && player2WinText)
+            {
+                player2WinText.text = string.Format("Wins: {0:0}", player2WinCounter);
+            }
         }
 
         public void setPlayer2WinCounter()
         {
             player2WinCounter++;
+            if (player1Canvas.activeSelf && player1WinText)
+            {
+                player1WinText.text = string.Format("Wins: {0:0}", player1WinCounter);
+            }
+            if (player2Canvas.activeSelf && player2WinText)
+            {
+                player2WinText.text = string.Format("Wins: {0:0}", player2WinCounter);
+            }
         }
 
         public void PlayerDied()
