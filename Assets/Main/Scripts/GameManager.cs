@@ -12,6 +12,7 @@ namespace Main.Scripts
         [SerializeField] private GameObject player2Canvas;
         [SerializeField] private GameObject player1;
         [SerializeField] private GameObject player2;
+        [SerializeField] private GameObject cardsCanvas;
         [SerializeField] private GameObject playerStatsCanvas;
         [SerializeField] private GameObject backgroundMusic;
         private PlayerStats _player1Stats;
@@ -58,6 +59,7 @@ namespace Main.Scripts
             startMenu.SetActive(true);
             player1Canvas.SetActive(false);
             player2Canvas.SetActive(false);
+            cardsCanvas.SetActive(false);
             _player1Stats = player1.GetComponent<PlayerStats>();
             _player2Stats = player2.GetComponent<PlayerStats>();
             playerStatsCanvas.SetActive(false);
@@ -78,6 +80,11 @@ namespace Main.Scripts
                     if (!playerStatsCanvas.activeSelf)
                     {
                         playerStatsCanvas.SetActive(true);
+                    }
+
+                    if (cardsCanvas.activeSelf)
+                    {
+                        cardsCanvas.SetActive(false);
                     }
 
                     _player1Stats.InitializePlayerStats();

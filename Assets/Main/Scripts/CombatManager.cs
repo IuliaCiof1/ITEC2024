@@ -69,14 +69,6 @@ public class CombatManager : MonoBehaviour
                 PlayerStats playerStats = _enemyPlayer.GetComponent<PlayerStats>();
                 playerStats.TakeDamageWeak();
             }
-
-            Debug.Log("CombatMngr: currentStamina = " + _playerStats.CurrentStamina + "Weak attack cost = " +
-                      _playerStats.GetWeakAttackCost());
-        }
-        else
-        {
-            Debug.Log("Not enough stamina: currentStamina = " + _playerStats.CurrentStamina + "Weak attack cost = " +
-                      _playerStats.GetWeakAttackCost());
         }
 
         return attackPerformed;
@@ -96,11 +88,6 @@ public class CombatManager : MonoBehaviour
                 playerStats.TakeDamageMedium();
             }
         }
-        else
-        {
-            Debug.Log("PerformMediumAttack--- Not enough stamina: currentStamina = " + _playerStats.CurrentStamina +
-                      "Weak attack cost = " + _playerStats.GetWeakAttackCost());
-        }
 
         return attackPerformed;
     }
@@ -118,11 +105,6 @@ public class CombatManager : MonoBehaviour
                 PlayerStats playerStats = _enemyPlayer.GetComponent<PlayerStats>();
                 playerStats.TakeDamageStrong();
             }
-        }
-        else
-        {
-            Debug.Log("PerformStrongAttack--- Not enough stamina: currentStamina = " + _playerStats.CurrentStamina +
-                      "Weak attack cost = " + _playerStats.GetWeakAttackCost());
         }
 
         return attackPerformed;

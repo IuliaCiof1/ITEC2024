@@ -383,7 +383,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ec9b3dfa32407846903e9ba91ecfb47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
 --- !u!1 &665818777745590750
 GameObject:
   m_ObjectHideFlags: 0
@@ -3550,6 +3549,10 @@ PrefabInstance:
     - target: {fileID: 3401279589391389488, guid: 3b730bc9ff0d60341af4e0ab1f69013f, type: 3}
       propertyPath: m_Name
       value: Decebal
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257413396748063728, guid: 3b730bc9ff0d60341af4e0ab1f69013f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8257413396748063728, guid: 3b730bc9ff0d60341af4e0ab1f69013f, type: 3}
       propertyPath: m_Controller
