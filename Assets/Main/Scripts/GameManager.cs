@@ -304,6 +304,15 @@ namespace Main.Scripts
             startMenu.SetActive(false);
             player1WinCounter = 0;
             player2WinCounter = 0;
+            if (player1Canvas.activeSelf && player1WinText)
+            {
+                player1WinText.text = "";
+            }
+
+            if (player2Canvas.activeSelf && player2WinText)
+            {
+                player2WinText.text = "";
+            }
             ChangeState(GameState.RoundStart);
         }
 

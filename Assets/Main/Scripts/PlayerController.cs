@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Main.Scripts
@@ -15,6 +17,7 @@ namespace Main.Scripts
         private const float MoveMultiplier = 15f;
         private CombatManager _combatManager;
         private PlayerStats _playerStats;
+        private bool inputEnabled = true;
 
         void Start()
         {
@@ -53,72 +56,89 @@ namespace Main.Scripts
         private void Player1InputHandler()
         {
             bool keyWasPressed = false;
-            if (Input.GetKeyDown(KeyCode.A)) // move back + regen
+            if (inputEnabled)
             {
-                keyWasPressed = true;
-                _playerStats.RegenStamina();
-                _rigidbody.AddForce(-transform.forward * MoveMultiplier, ForceMode.Impulse);
+                if (Input.GetKeyDown(KeyCode.A)) // move back + regen
+                {
+                    keyWasPressed = true;
+                    _playerStats.RegenStamina();
+                    _rigidbody.AddForce(-transform.forward * MoveMultiplier, ForceMode.Impulse);
+                }
+                else if (Input.GetKeyDown(KeyCode.S))
+                {
+                    keyWasPressed = true;
+                    _rigidbody.AddForce(transform.forward * MoveMultiplier, ForceMode.Impulse);
+                }
+                else if (Input.GetKeyDown(KeyCode.Z)) // Weak attack
+                {
+                    keyWasPressed = _combatManager.PerformWeakAttack();
+                }
+                else if (Input.GetKeyDown(KeyCode.X)) // Mid attack
+                {
+                    keyWasPressed = _combatManager.PerformMediumAttack();
+                }
+                else if (Input.GetKeyDown(KeyCode.C)) // Strong attack
+                {
+                    keyWasPressed = _combatManager.PerformStrongAttack();
+                }
             }
-            else if (Input.GetKeyDown(KeyCode.S))
-            {
-                keyWasPressed = true;
-                _rigidbody.AddForce(transform.forward * MoveMultiplier, ForceMode.Impulse);
-            }
-            else if (Input.GetKeyDown(KeyCode.Z)) // Weak attack
-            {
-                keyWasPressed = _combatManager.PerformWeakAttack();
-            }
-            else if (Input.GetKeyDown(KeyCode.X)) // Mid attack
-            {
-                keyWasPressed = _combatManager.PerformMediumAttack();
-            }
-            else if (Input.GetKeyDown(KeyCode.C)) // Strong attack
-            {
-                keyWasPressed = _combatManager.PerformStrongAttack();
-            }
+            
 
             if (keyWasPressed)
             {
                 GameManager.Instance.ChangeState(GameManager.GameState.Player1ExecutingAction);
+                inputEnabled = false;
+                StartCoroutine(EnableInput());
             }
         }
 
         private void Player2InputHandler()
         {
             bool keyWasPressed = false;
-            if (Input.GetKeyDown(KeyCode.K))
+            if (inputEnabled)
             {
-                keyWasPressed = true;
-                _rigidbody.AddForce(transform.forward * MoveMultiplier, ForceMode.Impulse);
-            }
-            else if (Input.GetKeyDown(KeyCode.L)) // move back + regen
-            {
-                keyWasPressed = true;
-                _playerStats.RegenStamina();
-                _rigidbody.AddForce(-transform.forward * MoveMultiplier, ForceMode.Impulse);
-            }
-            else if (Input.GetKeyDown(KeyCode.I)) // Weak attack
-            {
-                keyWasPressed = _combatManager.PerformWeakAttack();
-            }
-            else if (Input.GetKeyDown(KeyCode.O)) // Mid attack
-            {
-                keyWasPressed = _combatManager.PerformMediumAttack();
-            }
-            else if (Input.GetKeyDown(KeyCode.P)) // Strong attack
-            {
-                keyWasPressed = _combatManager.PerformStrongAttack();
+                if (Input.GetKeyDown(KeyCode.K))
+                {
+                    keyWasPressed = true;
+                    _rigidbody.AddForce(transform.forward * MoveMultiplier, ForceMode.Impulse);
+                }
+                else if (Input.GetKeyDown(KeyCode.L)) // move back + regen
+                {
+                    keyWasPressed = true;
+                    _playerStats.RegenStamina();
+                    _rigidbody.AddForce(-transform.forward * MoveMultiplier, ForceMode.Impulse);
+                }
+                else if (Input.GetKeyDown(KeyCode.I)) // Weak attack
+                {
+                    keyWasPressed = _combatManager.PerformWeakAttack();
+                }
+                else if (Input.GetKeyDown(KeyCode.O)) // Mid attack
+                {
+                    keyWasPressed = _combatManager.PerformMediumAttack();
+                }
+                else if (Input.GetKeyDown(KeyCode.P)) // Strong attack
+                {
+                    keyWasPressed = _combatManager.PerformStrongAttack();
+                }
             }
 
             if (keyWasPressed)
             {
                 GameManager.Instance.ChangeState(GameManager.GameState.Player2ExecutingAction);
+                inputEnabled = false;
+                StartCoroutine(EnableInput());
             }
         }
 
         public PlayerNr GetPlayerNr()
         {
             return playerNr;
+        }
+
+        IEnumerator EnableInput()
+        {
+            yield return new WaitForSeconds(0.5f);
+            inputEnabled = true;
         }
     }
 }
