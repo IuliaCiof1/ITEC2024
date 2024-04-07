@@ -143,7 +143,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3574624401858086285, guid: 3df15f0c0fc2f4a4ca9b66afd589b64b, type: 3}
       propertyPath: DamageModifier
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3949575326282159462, guid: 3df15f0c0fc2f4a4ca9b66afd589b64b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -409,10 +409,6 @@ PrefabInstance:
       propertyPath: player2StatsCanvas
       value: 
       objectReference: {fileID: 989453268}
-    - target: {fileID: 3322236412442331505, guid: a96f16bf1b537774a89deb98d7e24d06, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3758080763234803657, guid: a96f16bf1b537774a89deb98d7e24d06, type: 3}
       propertyPath: m_LocalPosition.x
       value: -68.62
@@ -457,10 +453,6 @@ PrefabInstance:
       propertyPath: weapon
       value: 
       objectReference: {fileID: 511045147}
-    - target: {fileID: 8487846965244420017, guid: a96f16bf1b537774a89deb98d7e24d06, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1515,6 +1507,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 127617954334456022, guid: afa0e2f88f5275045838b14cb8887f5b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 127617954334456022, guid: afa0e2f88f5275045838b14cb8887f5b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 127617954334456022, guid: afa0e2f88f5275045838b14cb8887f5b, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 803049534554123269, guid: afa0e2f88f5275045838b14cb8887f5b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1525,15 +1529,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1885503742138378110, guid: afa0e2f88f5275045838b14cb8887f5b, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1885503742138378110, guid: afa0e2f88f5275045838b14cb8887f5b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1885503742138378110, guid: afa0e2f88f5275045838b14cb8887f5b, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4670115873356419719, guid: afa0e2f88f5275045838b14cb8887f5b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4670115873356419719, guid: afa0e2f88f5275045838b14cb8887f5b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4670115873356419719, guid: afa0e2f88f5275045838b14cb8887f5b, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5093840069068277855, guid: afa0e2f88f5275045838b14cb8887f5b, type: 3}
       propertyPath: m_Pivot.x
@@ -1645,15 +1661,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7338808126161941401, guid: afa0e2f88f5275045838b14cb8887f5b, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7338808126161941401, guid: afa0e2f88f5275045838b14cb8887f5b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7338808126161941401, guid: afa0e2f88f5275045838b14cb8887f5b, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

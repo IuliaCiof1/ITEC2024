@@ -16,7 +16,7 @@ public class WeaponManager : MonoBehaviour
     private void Start()
     {
         stats = gameObject.GetComponentInParent<PlayerStats>();
-        NewWeapon(0);
+
         if (stats != null)
         {
             Debug.Log("PlayerStats component found.");

@@ -13,8 +13,8 @@ namespace Main.Scripts
         public float CurrentHealth { get; private set; }
         private int healthModif = 0;
 
-        private int baseDamage = 20;
-        private int damageModif = 0;
+        public int baseDamage = 20;
+        public int damageModif = 0;
 
         public int maxStamina = 100;
         public float CurrentStamina { get; private set; }
@@ -33,7 +33,7 @@ namespace Main.Scripts
             public const float Strong = 1.3f;
         }
 
-        private struct SkillDamageModifier
+        public struct SkillDamageModifier
         {
             public const float Weak = 0.4f;
             public const float Medium = 0.7f;
@@ -145,42 +145,11 @@ namespace Main.Scripts
             healthModif = hpModif;
             lostStaminaModif = lStaminaModif;
         }
-
-        public void TakeDamageWeak()
+        
+        public void TakeDamage(float dmg, float cameraShakeModifier)
         {
-            float dealtDamage = (baseDamage + damageModif) * SkillDamageModifier.Weak;
-            CurrentHealth = Mathf.Clamp(CurrentHealth - dealtDamage, 0f, maxHealth + healthModif);
-            deathSource.PlayOneShot(lightHitClip);
-
-            UpdateStaminaHealthCanvas();
-            if (CurrentHealth <= 0)
-            {
-                //sound
-                Die();
-            }
-        }
-
-        public void TakeDamageMedium()
-        {
-            float dealtDamage = (baseDamage + damageModif) * SkillDamageModifier.Medium;
-            CurrentHealth = Mathf.Clamp(CurrentHealth - dealtDamage, 0f, maxHealth + healthModif);
-            camFollow.ShakeCamera(2f);
-            deathSource.PlayOneShot(lightHitClip);
-            UpdateStaminaHealthCanvas();
-
-            if (CurrentHealth <= 0)
-            {
-                //sound
-                Die();
-            }
-        }
-
-
-        public void TakeDamageStrong()
-        {
-            float dealtDamage = (baseDamage + damageModif) * SkillDamageModifier.Strong;
-            CurrentHealth = Mathf.Clamp(CurrentHealth - dealtDamage, 0f, maxHealth + healthModif);
-            camFollow.ShakeCamera(4f);
+            CurrentHealth = Mathf.Clamp(CurrentHealth - dmg, 0f, maxHealth + healthModif);
+            camFollow.ShakeCamera(cameraShakeModifier);
             deathSource.PlayOneShot(highHitClip);
 
             UpdateStaminaHealthCanvas();

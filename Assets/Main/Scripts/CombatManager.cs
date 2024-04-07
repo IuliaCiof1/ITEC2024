@@ -66,8 +66,9 @@ public class CombatManager : MonoBehaviour
             _playerStats.DecreaseStaminaWeakSkill();
             if (_enemyPlayer != null)
             {
+                float dealtDamage = (_playerStats.baseDamage + _playerStats.damageModif) * PlayerStats.SkillDamageModifier.Weak;
                 PlayerStats playerStats = _enemyPlayer.GetComponent<PlayerStats>();
-                playerStats.TakeDamageWeak();
+                playerStats.TakeDamage(dealtDamage, 0f);
             }
         }
 
@@ -84,8 +85,9 @@ public class CombatManager : MonoBehaviour
             _playerStats.DecreaseStaminaMediumSkill();
             if (_enemyPlayer != null)
             {
+                float dealtDamage = (_playerStats.baseDamage + _playerStats.damageModif) * PlayerStats.SkillDamageModifier.Medium;
                 PlayerStats playerStats = _enemyPlayer.GetComponent<PlayerStats>();
-                playerStats.TakeDamageMedium();
+                playerStats.TakeDamage(dealtDamage, 2f);
             }
         }
 
@@ -102,8 +104,9 @@ public class CombatManager : MonoBehaviour
             _playerStats.DecreaseStaminaStrongSkill();
             if (_enemyPlayer != null)
             {
+                float dealtDamage = (_playerStats.baseDamage + _playerStats.damageModif) * PlayerStats.SkillDamageModifier.Strong;
                 PlayerStats playerStats = _enemyPlayer.GetComponent<PlayerStats>();
-                playerStats.TakeDamageStrong();
+                playerStats.TakeDamage(dealtDamage, 4f);
             }
         }
 

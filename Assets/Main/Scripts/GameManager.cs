@@ -76,6 +76,18 @@ namespace Main.Scripts
             _player1InitialPosition = _player1Stats.transform.position;
             _player2InitialPosition = _player2Stats.transform.position;
             _onePlayerDied = false;
+
+            WeaponManager weaponManager1 = player1.GetComponentInChildren<WeaponManager>();
+            if (weaponManager1 != null)
+            {
+                weaponManager1.NewWeapon(0);
+            }
+
+            WeaponManager weaponManager2 = player2.GetComponentInChildren<WeaponManager>();
+            if (weaponManager2 != null)
+            {
+                weaponManager2.NewWeapon(0);
+            }
         }
 
         // Update is called once per frame
@@ -313,6 +325,7 @@ namespace Main.Scripts
             {
                 player2WinText.text = "";
             }
+
             ChangeState(GameState.RoundStart);
         }
 
